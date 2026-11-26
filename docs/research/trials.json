@@ -27,7 +27,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 5038.0,
-    "stdout": "[\n  {\n    \"_mcpc\": {\n      \"sessionName\": \"@skill-cli-eval\",\n      \"server\": {\n        \"command\": \"python.exe\",\n        \"args\": [\n          \"RESEARCH_ROOT\\\\evaluation\\\\fixture.py\"\n        ]\n      },\n      \"status\": \"created\",\n      \"transport\": \"stdio\",\n      \"stateless\": false\n    },\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {\n      \"prompts\": {},\n      \"resources\": {},\n      \"tools\": {}\n    },\n    \"serverInfo\": {\n      \"name\": \"skill-cli-fixture\",\n      \"version\": \"1.0\"\n    },\n    \"toolNames\": [\n      \"echo\",\n      \"add\",\n      \"fail\"\n    ]\n  }\n]",
+    "stdout": "[\n  {\n    \"_mcpc\": {\n      \"sessionName\": \"@skill-cli-eval\",\n      \"server\": {\n        \"command\": \"python.exe\",\n        \"args\": [\n          \"RESEARCH_ROOT\\\\evaluation\\\\fixture.py\"\n        ]\n      },\n      \"status\": \"created\",\n      \"transport\": \"stdio\",\n      \"stateless\": false\n    },\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {\n      \"prompts\": {},\n      \"resources\": {},\n      \"tools\": {}\n    },\n    \"serverInfo\": {\n      \"name\": \"skill-cli-fixture\",\n      \"version\": \"1.0\"\n    },\n    \"toolNames\": [\n      \"echo\",\n      \"add\",\n      \"fail\"\n    ]\n  }\n]\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -43,7 +43,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 2853.57,
-    "stdout": "[\n  {\n    \"name\": \"echo\",\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true,\n      \"idempotentHint\": true\n    }\n  },\n  {\n    \"name\": \"add\",\n    \"description\": \"Add two numbers\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"a\": {\n          \"type\": \"number\"\n        },\n        \"b\": {\n          \"type\": \"number\"\n        }\n      },\n      \"required\": [\n        \"a\",\n        \"b\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true\n    }\n  },\n  {\n    \"name\": \"fail\",\n    \"description\": \"Return an MCP tool execution error\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]",
+    "stdout": "[\n  {\n    \"name\": \"echo\",\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true,\n      \"idempotentHint\": true\n    }\n  },\n  {\n    \"name\": \"add\",\n    \"description\": \"Add two numbers\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"a\": {\n          \"type\": \"number\"\n        },\n        \"b\": {\n          \"type\": \"number\"\n        }\n      },\n      \"required\": [\n        \"a\",\n        \"b\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true\n    }\n  },\n  {\n    \"name\": \"fail\",\n    \"description\": \"Return an MCP tool execution error\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -60,7 +60,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 3296.25,
-    "stdout": "{\n  \"sessions\": [\n    {\n      \"name\": \"@skill-cli-eval\",\n      \"status\": \"live\",\n      \"instructions\": false,\n      \"tools\": [\n        {\n          \"name\": \"echo\",\n          \"description\": \"Echo a message and nested JSON without side effects\",\n          \"inputSchema\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"message\": {\n                \"type\": \"string\"\n              },\n              \"payload\": {\n                \"type\": \"object\"\n              }\n            },\n            \"required\": [\n              \"message\"\n            ]\n          },\n          \"annotations\": {\n            \"readOnlyHint\": true,\n            \"idempotentHint\": true\n          }\n        }\n      ],\n      \"resources\": [],\n      \"prompts\": []\n    }\n  ],\n  \"totalMatches\": {\n    \"tools\": 1,\n    \"resources\": 0,\n    \"prompts\": 0\n  }\n}",
+    "stdout": "{\n  \"sessions\": [\n    {\n      \"name\": \"@skill-cli-eval\",\n      \"status\": \"live\",\n      \"instructions\": false,\n      \"tools\": [\n        {\n          \"name\": \"echo\",\n          \"description\": \"Echo a message and nested JSON without side effects\",\n          \"inputSchema\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"message\": {\n                \"type\": \"string\"\n              },\n              \"payload\": {\n                \"type\": \"object\"\n              }\n            },\n            \"required\": [\n              \"message\"\n            ]\n          },\n          \"annotations\": {\n            \"readOnlyHint\": true,\n            \"idempotentHint\": true\n          }\n        }\n      ],\n      \"resources\": [],\n      \"prompts\": []\n    }\n  ],\n  \"totalMatches\": {\n    \"tools\": 1,\n    \"resources\": 0,\n    \"prompts\": 0\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -77,7 +77,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 3358.0,
-    "stdout": "{\n  \"name\": \"echo\",\n  \"description\": \"Echo a message and nested JSON without side effects\",\n  \"inputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"message\": {\n        \"type\": \"string\"\n      },\n      \"payload\": {\n        \"type\": \"object\"\n      }\n    },\n    \"required\": [\n      \"message\"\n    ]\n  },\n  \"annotations\": {\n    \"readOnlyHint\": true,\n    \"idempotentHint\": true\n  }\n}",
+    "stdout": "{\n  \"name\": \"echo\",\n  \"description\": \"Echo a message and nested JSON without side effects\",\n  \"inputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"message\": {\n        \"type\": \"string\"\n      },\n      \"payload\": {\n        \"type\": \"object\"\n      }\n    },\n    \"required\": [\n      \"message\"\n    ]\n  },\n  \"annotations\": {\n    \"readOnlyHint\": true,\n    \"idempotentHint\": true\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -91,11 +91,11 @@
       "@skill-cli-eval",
       "tools-call",
       "echo",
-      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}"
+      "{\"message\":\"hello agent\",\"payload\":{\"items\":[1,true,null]}}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2895.84,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"message\\\": \\\"hello agent\\\",\\n  \\\"payload\\\": {\\n    \\\"items\\\": [\\n      1,\\n      true,\\n      null\\n    ]\\n  }\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"message\\\": \\\"hello agent\\\", \\\"payload\\\": {\\\"items\\\": [1, true, null]}}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -112,7 +112,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 2123.04,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -126,12 +126,12 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": \"bad\"\n}"
+      "{\"a\":\"bad\"}"
     ],
     "exit_code": 2,
     "elapsed_ms": 1858.18,
     "stdout": "",
-    "stderr": "{\n  \"error\": \"Failed to call tool add: unknown tool or invalid arguments. For details, run: mcpc @skill-cli-eval logs\",\n  \"code\": 2\n}",
+    "stderr": "{\n  \"error\": \"Failed to call tool add: unknown tool or invalid arguments. For details, run: mcpc @skill-cli-eval logs\",\n  \"code\": 2\n}\n",
     "stdout_json": false
   },
   {
@@ -148,7 +148,7 @@
     ],
     "exit_code": 2,
     "elapsed_ms": 2679.45,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -165,7 +165,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 2766.7,
-    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -182,7 +182,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 2651.69,
-    "stdout": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": {\n        \"type\": \"text\",\n        \"text\": \"Hello\"\n      }\n    }\n  ]\n}",
+    "stdout": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": {\n        \"type\": \"text\",\n        \"text\": \"Hello\"\n      }\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -196,11 +196,11 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2307.51,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -214,11 +214,11 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2514.07,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -232,11 +232,11 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2544.58,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -250,11 +250,11 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2087.29,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -268,11 +268,11 @@
       "@skill-cli-eval",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 0,
     "elapsed_ms": 2025.09,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -288,7 +288,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 2278.44,
-    "stdout": "{\n  \"sessionName\": \"@skill-cli-eval\",\n  \"closed\": true\n}",
+    "stdout": "{\n  \"sessionName\": \"@skill-cli-eval\",\n  \"closed\": true\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -322,7 +322,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 15629.51,
-    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 3643,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}",
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 3643,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\\"key\\\":\\\"value\\\"}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -341,7 +341,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 3601.07,
-    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 2679,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}",
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 2679,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\\"key\\\":\\\"value\\\"}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -356,13 +356,13 @@
       "call",
       "fixture.echo",
       "--args",
-      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}",
+      "{\"message\":\"hello agent\",\"payload\":{\"items\":[1,true,null]}}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 4231.41,
-    "stdout": "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}",
+    "stdout": "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -377,13 +377,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": \"bad\"\n}",
+      "{\"a\":\"bad\"}",
       "--output",
       "json"
     ],
     "exit_code": 1,
     "elapsed_ms": 3779.33,
-    "stdout": "{\n  \"server\": \"fixture\",\n  \"tool\": \"add\",\n  \"error\": \"unknown tool or invalid arguments\",\n  \"issue\": {\n    \"kind\": \"other\",\n    \"rawMessage\": \"unknown tool or invalid arguments\"\n  }\n}",
+    "stdout": "{\n  \"server\": \"fixture\",\n  \"tool\": \"add\",\n  \"error\": \"unknown tool or invalid arguments\",\n  \"issue\": {\n    \"kind\": \"other\",\n    \"rawMessage\": \"unknown tool or invalid arguments\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -404,7 +404,7 @@
     ],
     "exit_code": 1,
     "elapsed_ms": 3488.35,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -424,7 +424,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 3192.87,
-    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -460,13 +460,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\":2,\"b\":3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 3356.22,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -481,13 +481,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\":2,\"b\":3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 3299.41,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -502,13 +502,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\":2,\"b\":3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 3713.71,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -523,13 +523,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\":2,\"b\":3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 3603.21,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -544,13 +544,13 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\":2,\"b\":3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
     "elapsed_ms": 3524.47,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -567,7 +567,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 245.91,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"global_help\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"about\": \"Universal X-Protocol CLI\",\n    \"commands\": [\n      {\n        \"about\": \"Show global help\",\n        \"name\": \"help\"\n      },\n      {\n        \"about\": \"Import and normalize external runtime configs\",\n        \"name\": \"config\"\n      },\n      {\n        \"about\": \"Manage schema cache\",\n        \"name\": \"cache\"\n      },\n      {\n        \"about\": \"Manage credentials, bindings, and OAuth\",\n        \"name\": \"auth\"\n      },\n      {\n        \"about\": \"Create a host-bound shortcut command\",\n        \"name\": \"link\"\n      },\n      {\n        \"about\": \"Manage local runtime daemon\",\n        \"name\": \"daemon\"\n      },\n      {\n        \"about\": \"Manage daemon-backed source streams\",\n        \"name\": \"source\"\n      },\n      {\n        \"about\": \"Read and maintain durable source streams\",\n        \"name\": \"stream\"\n      },\n      {\n        \"about\": \"Send and reply to email over SMTP\",\n        \"name\": \"email\"\n      }\n    ],\n    \"examples\": [\n      \"uxc -h\",\n      \"uxc <host> -h\",\n      \"uxc <host> --codegen-schema\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> key=value\",\n      \"uxc --auth thegraph --inject-env THEGRAPH_API_KEY={{secret}} \\\"npx -y mcp-remote --header \\\\\\\"Authorization: Bearer ${THEGRAPH_API_KEY}\\\\\\\" https://subgraphs.mcp.thegraph.com/sse\\\" -h\"\n    ],\n    \"notes\": [\n      \"Default output is JSON. Use --text for human-readable output.\",\n      \"For endpoints, use: uxc <host> -h, uxc <host> <operation_id> -h, and uxc <host> <operation_id> ...\",\n      \"Use --codegen-schema to export host-scoped runtime codegen input (without emitter output).\",\n      \"--inject-env NAME={{secret}} is available for stdio endpoints when a credential is supplied.\"\n    ],\n    \"path\": \"uxc\",\n    \"usage\": \"uxc [OPTIONS] [URL] [COMMAND]\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"global_help\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"about\": \"Universal X-Protocol CLI\",\n    \"commands\": [\n      {\n        \"about\": \"Show global help\",\n        \"name\": \"help\"\n      },\n      {\n        \"about\": \"Import and normalize external runtime configs\",\n        \"name\": \"config\"\n      },\n      {\n        \"about\": \"Manage schema cache\",\n        \"name\": \"cache\"\n      },\n      {\n        \"about\": \"Manage credentials, bindings, and OAuth\",\n        \"name\": \"auth\"\n      },\n      {\n        \"about\": \"Create a host-bound shortcut command\",\n        \"name\": \"link\"\n      },\n      {\n        \"about\": \"Manage local runtime daemon\",\n        \"name\": \"daemon\"\n      },\n      {\n        \"about\": \"Manage daemon-backed source streams\",\n        \"name\": \"source\"\n      },\n      {\n        \"about\": \"Read and maintain durable source streams\",\n        \"name\": \"stream\"\n      },\n      {\n        \"about\": \"Send and reply to email over SMTP\",\n        \"name\": \"email\"\n      }\n    ],\n    \"examples\": [\n      \"uxc -h\",\n      \"uxc <host> -h\",\n      \"uxc <host> --codegen-schema\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> key=value\",\n      \"uxc --auth thegraph --inject-env THEGRAPH_API_KEY={{secret}} \\\"npx -y mcp-remote --header \\\\\\\"Authorization: Bearer ${THEGRAPH_API_KEY}\\\\\\\" https://subgraphs.mcp.thegraph.com/sse\\\" -h\"\n    ],\n    \"notes\": [\n      \"Default output is JSON. Use --text for human-readable output.\",\n      \"For endpoints, use: uxc <host> -h, uxc <host> <operation_id> -h, and uxc <host> <operation_id> ...\",\n      \"Use --codegen-schema to export host-scoped runtime codegen input (without emitter output).\",\n      \"--inject-env NAME={{secret}} is available for stdio endpoints when a credential is supplied.\"\n    ],\n    \"path\": \"uxc\",\n    \"usage\": \"uxc [OPTIONS] [URL] [COMMAND]\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -585,7 +585,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 629.02,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 394,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": true,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 394,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": true,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -604,7 +604,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 249.01,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"operation_detail\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"display_name\": \"echo\",\n    \"input_schema\": {\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ],\n      \"type\": \"object\"\n    },\n    \"invocation_examples\": [\n      \"uxc <host> echo message=value\"\n    ],\n    \"operation_id\": \"echo\",\n    \"parameters\": [\n      {\n        \"description\": null,\n        \"name\": \"message\",\n        \"param_type\": \"string\",\n        \"required\": true\n      },\n      {\n        \"description\": null,\n        \"name\": \"payload\",\n        \"param_type\": \"object\",\n        \"required\": false\n      }\n    ],\n    \"return_type\": \"ToolContent\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 0,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"operation_detail\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"display_name\": \"echo\",\n    \"input_schema\": {\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ],\n      \"type\": \"object\"\n    },\n    \"invocation_examples\": [\n      \"uxc <host> echo message=value\"\n    ],\n    \"operation_id\": \"echo\",\n    \"parameters\": [\n      {\n        \"description\": null,\n        \"name\": \"message\",\n        \"param_type\": \"string\",\n        \"required\": true\n      },\n      {\n        \"description\": null,\n        \"name\": \"payload\",\n        \"param_type\": \"object\",\n        \"required\": false\n      }\n    ],\n    \"return_type\": \"ToolContent\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 0,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -619,11 +619,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "echo",
-      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}"
+      "{\"message\":\"hello agent\",\"payload\":{\"items\":[1,true,null]}}"
     ],
     "exit_code": 0,
     "elapsed_ms": 420.94,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"message\\\": \\\"hello agent\\\",\\n  \\\"payload\\\": {\\n    \\\"items\\\": [\\n      1,\\n      true,\\n      null\\n    ]\\n  }\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 289,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"message\\\": \\\"hello agent\\\", \\\"payload\\\": {\\\"items\\\": [1, true, null]}}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 289,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": false\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -638,11 +638,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": \"bad\"\n}"
+      "{\"a\":\"bad\"}"
     ],
     "exit_code": 1,
     "elapsed_ms": 262.61,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Invalid arguments: Invalid value at $.b: missing required field\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Invalid arguments: Invalid value at $.b: missing required field\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -661,7 +661,7 @@
     ],
     "exit_code": 0,
     "elapsed_ms": 234.98,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"fail\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"deliberate fixture failure\",\n        \"type\": \"text\"\n      }\n    ],\n    \"isError\": true,\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 6,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"fail\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"deliberate fixture failure\",\n        \"type\": \"text\"\n      }\n    ],\n    \"isError\": true,\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 6,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -676,11 +676,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 1,
     "elapsed_ms": 224.37,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -695,11 +695,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 1,
     "elapsed_ms": 227.59,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -714,11 +714,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 1,
     "elapsed_ms": 359.85,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -733,11 +733,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 1,
     "elapsed_ms": 228.32,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   },
@@ -752,11 +752,11 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\":2,\"b\":3}"
     ],
     "exit_code": 1,
     "elapsed_ms": 204.46,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "stdout_json": true
   }

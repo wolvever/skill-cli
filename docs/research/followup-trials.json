@@ -14,7 +14,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 16,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 16,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 361.75
   },
@@ -33,7 +33,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 12,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 12,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 328.86
   },
@@ -52,7 +52,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 14,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 14,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 327.87
   },
@@ -71,7 +71,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 28,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 28,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 436.46
   },
@@ -90,7 +90,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 18,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 18,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 361.85
   },
@@ -105,10 +105,10 @@
       "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
       "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\": 2, \"b\": 3}"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 16,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 16,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 335.83
   },
@@ -125,7 +125,7 @@
       "add"
     ],
     "exit_code": 1,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"unknown tool or invalid arguments\",\n    \"details\": {\n      \"jsonrpc_code\": -32602,\n      \"jsonrpc_message\": \"unknown tool or invalid arguments\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"unknown tool or invalid arguments\",\n    \"details\": {\n      \"jsonrpc_code\": -32602,\n      \"jsonrpc_message\": \"unknown tool or invalid arguments\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 330.39
   },
@@ -142,7 +142,7 @@
       "-h"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/mcp\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 31,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/mcp\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 31,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 327.26
   },
@@ -161,7 +161,7 @@
       "b=3"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/mcp\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"sum\\\": 5.0\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 14,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 1000,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/mcp\",\n  \"operation\": \"add\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\\"sum\\\": 5.0}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 14,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 1000,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": false\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 323.65
   },
@@ -178,7 +178,7 @@
       "-h"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/openapi.json\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 10,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"http://127.0.0.1:18761/openapi.json\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 10,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 332.48
   },
@@ -196,7 +196,7 @@
       "-h"
     ],
     "exit_code": 1,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"Tool 'get:/pets/{id}' not found\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"Tool 'get:/pets/{id}' not found\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 298.06
   },
@@ -215,7 +215,7 @@
       "verbose=true"
     ],
     "exit_code": 1,
-    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"unknown tool or invalid arguments\",\n    \"details\": {\n      \"jsonrpc_code\": -32602,\n      \"jsonrpc_message\": \"unknown tool or invalid arguments\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"EXECUTION_FAILED\",\n    \"message\": \"unknown tool or invalid arguments\",\n    \"details\": {\n      \"jsonrpc_code\": -32602,\n      \"jsonrpc_message\": \"unknown tool or invalid arguments\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 405.22
   },
@@ -232,7 +232,7 @@
       "status"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"daemon_status\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"client_version\": \"0.23.1\",\n    \"email_body\": {\n      \"deadline_seconds\": 30,\n      \"inline_mime_max_bytes\": 4194304,\n      \"input_kinds\": [\n        \"inline_mime\",\n        \"legacy_mime\",\n        \"message_ref\"\n      ],\n      \"normalized_text_max_bytes\": 1048576,\n      \"parser_version\": \"1\",\n      \"provider_response_max_bytes\": 16777216,\n      \"providers\": [\n        \"imap\",\n        \"gmail\",\n        \"graph\",\n        \"jmap\"\n      ],\n      \"schema_version\": 1\n    },\n    \"log_file\": \"/home/agent/.uxc/daemon/daemon.log\",\n    \"managed_sources\": 0,\n    \"managed_sources_running\": 0,\n    \"managed_streams\": 0,\n    \"mcp_http_sessions\": 2,\n    \"mcp_reuse_hits\": 9,\n    \"mcp_stdio_sessions\": 1,\n    \"owner_lock_held\": true,\n    \"owner_pid\": \"<pid>\",\n    \"owner_pid_alive\": true,\n    \"owner_socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"owner_started_at_unix\": 1795712024,\n    \"owner_version\": \"0.23.1\",\n    \"pid\": \"<pid>\",\n    \"request_count\": 17,\n    \"running\": true,\n    \"socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"socket_exists\": true,\n    \"started_at_unix\": 1795712024,\n    \"version\": \"0.23.1\",\n    \"version_mismatch\": false\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"daemon_status\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"client_version\": \"0.23.1\",\n    \"email_body\": {\n      \"deadline_seconds\": 30,\n      \"inline_mime_max_bytes\": 4194304,\n      \"input_kinds\": [\n        \"inline_mime\",\n        \"legacy_mime\",\n        \"message_ref\"\n      ],\n      \"normalized_text_max_bytes\": 1048576,\n      \"parser_version\": \"1\",\n      \"provider_response_max_bytes\": 16777216,\n      \"providers\": [\n        \"imap\",\n        \"gmail\",\n        \"graph\",\n        \"jmap\"\n      ],\n      \"schema_version\": 1\n    },\n    \"log_file\": \"/home/agent/.uxc/daemon/daemon.log\",\n    \"managed_sources\": 0,\n    \"managed_sources_running\": 0,\n    \"managed_streams\": 0,\n    \"mcp_http_sessions\": 2,\n    \"mcp_reuse_hits\": 9,\n    \"mcp_stdio_sessions\": 1,\n    \"owner_lock_held\": true,\n    \"owner_pid\": 110871,\n    \"owner_pid_alive\": true,\n    \"owner_socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"owner_started_at_unix\": 1795712024,\n    \"owner_version\": \"0.23.1\",\n    \"pid\": 110871,\n    \"request_count\": 17,\n    \"running\": true,\n    \"socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"socket_exists\": true,\n    \"started_at_unix\": 1795712024,\n    \"version\": \"0.23.1\",\n    \"version_mismatch\": false\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 346.69
   },
@@ -248,7 +248,7 @@
       "@skill-cli-http"
     ],
     "exit_code": 0,
-    "stdout": "[\n  {\n    \"_mcpc\": {\n      \"sessionName\": \"@skill-cli-http\",\n      \"server\": {\n        \"url\": \"http://127.0.0.1:18760/mcp\"\n      },\n      \"status\": \"created\",\n      \"transport\": \"streamable-http\",\n      \"stateless\": true\n    },\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {\n      \"prompts\": {},\n      \"resources\": {},\n      \"tools\": {}\n    },\n    \"serverInfo\": {\n      \"name\": \"skill-cli-fixture\",\n      \"version\": \"1.0\"\n    },\n    \"toolNames\": [\n      \"echo\",\n      \"add\",\n      \"fail\"\n    ]\n  }\n]",
+    "stdout": "[\n  {\n    \"_mcpc\": {\n      \"sessionName\": \"@skill-cli-http\",\n      \"server\": {\n        \"url\": \"http://127.0.0.1:18760/mcp\"\n      },\n      \"status\": \"created\",\n      \"transport\": \"streamable-http\",\n      \"stateless\": true\n    },\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {\n      \"prompts\": {},\n      \"resources\": {},\n      \"tools\": {}\n    },\n    \"serverInfo\": {\n      \"name\": \"skill-cli-fixture\",\n      \"version\": \"1.0\"\n    },\n    \"toolNames\": [\n      \"echo\",\n      \"add\",\n      \"fail\"\n    ]\n  }\n]\n",
     "stderr": "",
     "elapsed_ms": 14369.37
   },
@@ -263,7 +263,7 @@
       "tools-list"
     ],
     "exit_code": 0,
-    "stdout": "[\n  {\n    \"name\": \"echo\",\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true,\n      \"idempotentHint\": true\n    }\n  },\n  {\n    \"name\": \"add\",\n    \"description\": \"Add two numbers\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"a\": {\n          \"type\": \"number\"\n        },\n        \"b\": {\n          \"type\": \"number\"\n        }\n      },\n      \"required\": [\n        \"a\",\n        \"b\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true\n    }\n  },\n  {\n    \"name\": \"fail\",\n    \"description\": \"Return an MCP tool execution error\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]",
+    "stdout": "[\n  {\n    \"name\": \"echo\",\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true,\n      \"idempotentHint\": true\n    }\n  },\n  {\n    \"name\": \"add\",\n    \"description\": \"Add two numbers\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"a\": {\n          \"type\": \"number\"\n        },\n        \"b\": {\n          \"type\": \"number\"\n        }\n      },\n      \"required\": [\n        \"a\",\n        \"b\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true\n    }\n  },\n  {\n    \"name\": \"fail\",\n    \"description\": \"Return an MCP tool execution error\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]\n",
     "stderr": "",
     "elapsed_ms": 2766.74
   },
@@ -277,10 +277,10 @@
       "@skill-cli-http",
       "tools-call",
       "add",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+      "{\"a\": 2, \"b\": 3}"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\\"sum\\\": 5}\"\n    }\n  ]\n}\n",
     "stderr": "",
     "elapsed_ms": 3182.71
   },
@@ -295,7 +295,7 @@
       "close"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sessionName\": \"@skill-cli-http\",\n  \"closed\": true\n}",
+    "stdout": "{\n  \"sessionName\": \"@skill-cli-http\",\n  \"closed\": true\n}\n",
     "stderr": "",
     "elapsed_ms": 2361.57
   },
@@ -313,7 +313,7 @@
       "--json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 2986,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    }\n  ]\n}",
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 2986,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\\"key\\\":\\\"value\\\"}\"\n        }\n      ]\n    }\n  ]\n}\n",
     "stderr": "",
     "elapsed_ms": 4090.39
   },
@@ -330,7 +330,7 @@
       "--json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"httpfixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 197,\n  \"transport\": \"HTTP http://127.0.0.1:18760/mcp\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}",
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"httpfixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 197,\n  \"transport\": \"HTTP http://127.0.0.1:18760/mcp\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\\"key\\\":\\\"value\\\"}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}\n",
     "stderr": "",
     "elapsed_ms": 1240.66
   },
@@ -345,12 +345,12 @@
       "call",
       "httpfixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 1281.98
   },
@@ -370,7 +370,7 @@
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 7991.94
   },
@@ -385,12 +385,12 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 2118.67
   },
@@ -405,12 +405,12 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 1965.89
   },
@@ -425,12 +425,12 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 1841.83
   },
@@ -445,12 +445,12 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 1675.01
   },
@@ -465,12 +465,12 @@
       "call",
       "fixture.add",
       "--args",
-      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "{\"a\": 2, \"b\": 3}",
       "--output",
       "json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"sum\": 5\n}",
+    "stdout": "{\n  \"sum\": 5\n}\n",
     "stderr": "",
     "elapsed_ms": 1533.23
   },
@@ -487,7 +487,7 @@
       "--json"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"pid\": \"<pid>\",\n  \"protocolVersion\": 3,\n  \"startedAt\": 1795712290669,\n  \"configPath\": \"\",\n  \"socketPath\": \"\\\\\\\\.\\\\pipe\\\\mcporter-user-c1640b80c1aff0f458dd50f1\",\n  \"generation\": \"REDACTED_UUID\",\n  \"views\": 0,\n  \"servers\": [\n    {\n      \"name\": \"REDACTED_UUID\",\n      \"connectionId\": \"REDACTED_UUID\",\n      \"connectionGeneration\": 1,\n      \"connected\": true,\n      \"activeCalls\": 0,\n      \"lastUsedAt\": 1795712304006\n    }\n  ],\n  \"idleShutdownBlocked\": false\n}",
+    "stdout": "{\"pid\":23560,\"protocolVersion\":3,\"startedAt\":1795712290669,\"configPath\":\"\",\"socketPath\":\"\\\\\\\\.\\\\pipe\\\\mcporter-user-c1640b80c1aff0f458dd50f1\",\"generation\":\"REDACTED_UUID\",\"views\":0,\"servers\":[{\"name\":\"REDACTED_UUID\",\"connectionId\":\"REDACTED_UUID\",\"connectionGeneration\":1,\"connected\":true,\"activeCalls\":0,\"lastUsedAt\":1795712304006}],\"idleShutdownBlocked\":false}\n",
     "stderr": "",
     "elapsed_ms": 1403.4
   },
@@ -520,7 +520,7 @@
       "stop"
     ],
     "exit_code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"daemon_stop_result\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"stopped\": true\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"daemon_stop_result\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"socket\": \"/home/agent/.uxc/daemon/uxc.sock\",\n    \"stopped\": true\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}\n",
     "stderr": "",
     "elapsed_ms": 269.73
   }
