@@ -12,4 +12,4 @@ The smoke cases exercise actual executables for discovery, search, description, 
 
 An aggregate Windows `go test -cover ./...` attempt failed because the downloaded toolchain could not find `covdata` for command packages with no tests; package test results themselves passed. No complete coverage percentage is claimed. Regular tests and Linux race checks succeeded independently.
 
-macOS checks are configured in GitHub Actions and require a successful CI run before being described as verified. Authentication testing used synthetic gateway and bearer tokens; interactive provider OAuth and live third-party credentials were not tested.
+GitHub Actions subsequently passed `go vet`, tests, and builds on **Linux, Windows, and macOS**, plus the Linux race check: [verified run](https://github.com/wolvever/skill-cli/actions/runs/45865766052). Authentication testing used synthetic gateway and bearer tokens; interactive provider OAuth and live third-party credentials were not tested.
