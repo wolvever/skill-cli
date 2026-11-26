@@ -1,0 +1,74 @@
+[
+  {
+    "project": "uxc",
+    "url": "https://github.com/holon-run/uxc.git",
+    "sha": "35176b115023c34cc457220c10ec592d014bdca9",
+    "commit": "2026-11-24T08:15:47+08:00 chore(release): \u51c6\u5907 v0.23.1 (#480)"
+  },
+  {
+    "project": "mcpc",
+    "url": "https://github.com/apify/mcpc.git",
+    "sha": "cd060046f3b7608a5a3f2e1314eae65c6ee89821",
+    "commit": "2026-11-26T12:15:45+01:00 Stop an oversized IPC response from restarting a healthy bridge, plus small security review fixes (#512)"
+  },
+  {
+    "project": "mcporter",
+    "url": "https://github.com/steipete/mcporter.git",
+    "sha": "aa8d0c5ac6cdcbf385d884d85d555b5d48e0a6c3",
+    "commit": "2026-11-21T17:26:40-06:00 docs: help PR reviewers understand the problem before the fix (#522)"
+  },
+  {
+    "project": "mcp2cli",
+    "url": "https://github.com/knowsuchagency/mcp2cli.git",
+    "sha": "bed40af2feeb4dbadf444c24687ef4ec60d825c2",
+    "commit": "2026-11-09T00:34:36Z Merge pull request #129 from JoeyLearnsToCode/main"
+  },
+  {
+    "project": "mcp-cli",
+    "url": "https://github.com/philschmid/mcp-cli.git",
+    "sha": "d77672a1ce800ec3fec1f43829909badb2ffbd32",
+    "commit": "2026-02-05T16:24:58+01:00 fix: call command outputs raw text content instead of MCP envelope (#30)"
+  },
+  {
+    "project": "mcp2cli-go",
+    "url": "https://github.com/xilistudios/mcp2cli.git",
+    "sha": "f078c6bf27e2c7f5524b003715ad802b4634931d",
+    "commit": "2026-09-03T09:04:51-06:00 Merge pull request #3 from xilistudios/fix/oauth-keyring-persistence"
+  },
+  {
+    "project": "mcp-inspect",
+    "url": "https://github.com/masuda-masuo/mcp-inspect.git",
+    "sha": "13d80463bfce06f43c240c0712d49724abc228af",
+    "commit": "2026-07-29T14:45:47+09:00 Merge pull request #2 from masuda-masuo/chore/workflow-permissions"
+  },
+  {
+    "project": "inspector",
+    "url": "https://github.com/modelcontextprotocol/inspector.git",
+    "sha": "eb54b447e5377a7a18acaea9602fced5cb4c5b9f",
+    "commit": "2026-11-18T04:04:15-05:00 Merge pull request #3006 from modelcontextprotocol/v2/chore/milestone-merge-v2.16.0"
+  },
+  {
+    "project": "restish",
+    "url": "https://github.com/danielgtaylor/restish.git",
+    "sha": "79c3d885284ce3cb966f0089807db5053509989c",
+    "commit": "2026-09-29T06:52:04+02:00 Merge pull request #444 from rest-sh/claude/project-thread-bdht55"
+  },
+  {
+    "project": "openapi2cli",
+    "url": "https://github.com/Olafs-World/openapi2cli.git",
+    "sha": "f5261c76c2a7cd33ee28f09d789363c9b6bc1ea6",
+    "commit": "2026-02-12T17:55:24Z Update agent install instructions"
+  },
+  {
+    "project": "skill-creator",
+    "url": "https://github.com/sandiiarov/skill-creator.git",
+    "sha": "f59b7d67192700e79f0b277b280833959342dc8d",
+    "commit": "2026-06-02T20:23:01-04:00 Release v0.2.0"
+  },
+  {
+    "project": "fastmcp",
+    "url": "https://github.com/PrefectHQ/fastmcp.git",
+    "sha": "fbdb50f8a6f9a7f723f4ed4c446da4fa6179da29",
+    "commit": "2026-11-25T19:58:50-05:00 docs: add v4.2.7a1 changelog entries (#6831)"
+  }
+]

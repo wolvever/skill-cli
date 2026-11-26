@@ -1,0 +1,8 @@
+{
+  "providers": {
+    "demo": {"type": "mcp", "transport": "http", "url": "http://127.0.0.1:8080/mcp"},
+    "legacy": {"type": "mcp", "transport": "sse", "url": "http://127.0.0.1:8080/sse"},
+    "pets": {"type": "openapi", "spec": "petstore.yaml", "url": "http://127.0.0.1:8080"},
+    "rest": {"type": "http", "url": "http://127.0.0.1:8080"}
+  }
+}

@@ -1,0 +1,763 @@
+[
+  {
+    "tool": "mcpc",
+    "case": "help",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "--help"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3258.17,
+    "stdout": "Usage: mcpc [<@session>] [<command>] [options]\n\nUniversal command-line client for the Model Context Protocol (MCP).\n\nCommands:\n  connect [<server>] [@session]  Connect to an MCP server and start a new named @session\n  close <@session>               Close a session\n  restart <@session>             Restart a session (losing all state)\n  login <server>                 Log in to a server and save an OAuth profile\n  logout <server>                Delete an OAuth profile for a server\n  clean [resources...]           Clean up mcpc data (sessions, profiles, logs, all)\n  grep <pattern>                 Search tools and instructions across all active sessions\n  x402 [subcommand] [args...]    Configure an x402 payment wallet (EXPERIMENTAL)\n  help [command] [subcommand]    Show help for a command\n\nOptions:\n  --json                         Output in JSON format for scripting\n  --verbose                      Enable debug logging\n  --profile <name>               OAuth profile for the server (\"default\" if not provided)\n  --timeout <seconds>            Request timeout in seconds (default: 60)\n  --max-chars <n>                Truncate output to n characters (ignored in --json mode)\n  --insecure                     Skip TLS certificate verification (for self-signed certs)\n  -v, --version                  Output the version number\n  -h, --help                     Display help\n\nMCP session commands (after connecting):\n  <@session>                     Show MCP server info, capabilities, and tools overview\n  <@session> grep <pattern>      Search tools and instructions\n  <@session> tools-list          List all server tools\n  <@session> tools-get <name>    Get tool details and schema\n  <@session> tools-call <name> [arg:=val ... | <json> | <stdin]\n  <@session> tasks-list\n  <@session> tasks-get <taskId>\n  <@session> tasks-result <taskId>\n  <@session> tasks-cancel <taskId>\n  <@session> prompts-list\n  <@session> prompts-get <name> [arg:=val ... | <json> | <stdin]\n  <@session> completion-complete prompt|resource <ref> <arg:=val ... | <json> | <stdin>\n  <@session> resources-list\n  <@session> resources-read <uri> [-o <file> | --raw]\n  <@session> resources-subscribe <uri> <file>\n  <@session> resources-unsubscribe <uri>\n  <@session> resources-templates-list\n  <@session> resources-directory-read <uri>\n  <@session> skills-list\n  <@session> skills-get <skill> [file] [--raw]\n  <@session> logging-set-level <level>\n  <@session> ping\n  <@session> server-discover\n  <@session> logs [-n N] [--follow] [--since 1h]\n\nRun \"mcpc\" without arguments to show active sessions and OAuth profiles.\nRun \"mcpc --json\" to get the same data as `{ sessions: [...], profiles: [...] }`.\n\nAgent guide: mcpc help --skill\nFull docs: https://github.com/apify/mcpc/raw/refs/tags/v0.8.0/README.md\n",
+    "stderr": "",
+    "stdout_json": false
+  },
+  {
+    "tool": "mcpc",
+    "case": "connect",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "connect",
+      "RESEARCH_ROOT\\evaluation\\mcp.json:fixture",
+      "@skill-cli-eval"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 5038.0,
+    "stdout": "[\n  {\n    \"_mcpc\": {\n      \"sessionName\": \"@skill-cli-eval\",\n      \"server\": {\n        \"command\": \"python.exe\",\n        \"args\": [\n          \"RESEARCH_ROOT\\\\evaluation\\\\fixture.py\"\n        ]\n      },\n      \"status\": \"created\",\n      \"transport\": \"stdio\",\n      \"stateless\": false\n    },\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {\n      \"prompts\": {},\n      \"resources\": {},\n      \"tools\": {}\n    },\n    \"serverInfo\": {\n      \"name\": \"skill-cli-fixture\",\n      \"version\": \"1.0\"\n    },\n    \"toolNames\": [\n      \"echo\",\n      \"add\",\n      \"fail\"\n    ]\n  }\n]",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "list",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-list"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2853.57,
+    "stdout": "[\n  {\n    \"name\": \"echo\",\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true,\n      \"idempotentHint\": true\n    }\n  },\n  {\n    \"name\": \"add\",\n    \"description\": \"Add two numbers\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"a\": {\n          \"type\": \"number\"\n        },\n        \"b\": {\n          \"type\": \"number\"\n        }\n      },\n      \"required\": [\n        \"a\",\n        \"b\"\n      ]\n    },\n    \"annotations\": {\n      \"readOnlyHint\": true\n    }\n  },\n  {\n    \"name\": \"fail\",\n    \"description\": \"Return an MCP tool execution error\",\n    \"inputSchema\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "search",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "grep",
+      "echo"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3296.25,
+    "stdout": "{\n  \"sessions\": [\n    {\n      \"name\": \"@skill-cli-eval\",\n      \"status\": \"live\",\n      \"instructions\": false,\n      \"tools\": [\n        {\n          \"name\": \"echo\",\n          \"description\": \"Echo a message and nested JSON without side effects\",\n          \"inputSchema\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"message\": {\n                \"type\": \"string\"\n              },\n              \"payload\": {\n                \"type\": \"object\"\n              }\n            },\n            \"required\": [\n              \"message\"\n            ]\n          },\n          \"annotations\": {\n            \"readOnlyHint\": true,\n            \"idempotentHint\": true\n          }\n        }\n      ],\n      \"resources\": [],\n      \"prompts\": []\n    }\n  ],\n  \"totalMatches\": {\n    \"tools\": 1,\n    \"resources\": 0,\n    \"prompts\": 0\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "describe",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-get",
+      "echo"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3358.0,
+    "stdout": "{\n  \"name\": \"echo\",\n  \"description\": \"Echo a message and nested JSON without side effects\",\n  \"inputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"message\": {\n        \"type\": \"string\"\n      },\n      \"payload\": {\n        \"type\": \"object\"\n      }\n    },\n    \"required\": [\n      \"message\"\n    ]\n  },\n  \"annotations\": {\n    \"readOnlyHint\": true,\n    \"idempotentHint\": true\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "call",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "echo",
+      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2895.84,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"message\\\": \\\"hello agent\\\",\\n  \\\"payload\\\": {\\n    \\\"items\\\": [\\n      1,\\n      true,\\n      null\\n    ]\\n  }\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "stdin",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2123.04,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "invalid",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": \"bad\"\n}"
+    ],
+    "exit_code": 2,
+    "elapsed_ms": 1858.18,
+    "stdout": "",
+    "stderr": "{\n  \"error\": \"Failed to call tool add: unknown tool or invalid arguments. For details, run: mcpc @skill-cli-eval logs\",\n  \"code\": 2\n}",
+    "stdout_json": false
+  },
+  {
+    "tool": "mcpc",
+    "case": "tool_error",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "fail",
+      "{}"
+    ],
+    "exit_code": 2,
+    "elapsed_ms": 2679.45,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "resource",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "resources-read",
+      "fixture://readme"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2766.7,
+    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "prompt",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "prompts-get",
+      "greeting"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2651.69,
+    "stdout": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": {\n        \"type\": \"text\",\n        \"text\": \"Hello\"\n      }\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "warm_call_0",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2307.51,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "warm_call_1",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2514.07,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "warm_call_2",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2544.58,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "warm_call_3",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2087.29,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "warm_call_4",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "tools-call",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2025.09,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"{\\n  \\\"sum\\\": 5\\n}\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcpc",
+    "case": "close",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\@apify\\mcpc\\dist\\cli\\index.js",
+      "--json",
+      "@skill-cli-eval",
+      "close"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 2278.44,
+    "stdout": "{\n  \"sessionName\": \"@skill-cli-eval\",\n  \"closed\": true\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "help",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "--help"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 275.8,
+    "stdout": "",
+    "stderr": "mcporter \u2014 Model Context Protocol CLI & generator\n\nUsage: mcporter <command> [options]\n\nCore commands\n  list      List configured servers (add --schema for tool docs)\n    usage: mcporter list [name] [--schema] [--json]\n  call      Call a tool by selector (server.tool) or HTTP URL; key=value flags supported\n    usage: mcporter call <selector> [key=value ...]\n  resource  List or read MCP resources exposed by a server\n    usage: mcporter resource <server> [uri]\n  auth      Complete OAuth for a server without listing tools\n    usage: mcporter auth <server | url> [--reset]\n  vault     Seed or clear OAuth credentials non-interactively\n    usage: mcporter vault set <server> --tokens-file <path>\n  record    Capture MCP JSON-RPC traffic to NDJSON\n    usage: mcporter record <session-name> [--server <name>] [-- <command>]\n  replay    Replay recorded MCP JSON-RPC traffic deterministically\n    usage: mcporter replay <session-name> [--server <name>] [-- <command>]\n\nGenerator & tooling\n  generate-cli  Emit a standalone CLI (supports HTTP, stdio, and inline commands)\n    usage: mcporter generate-cli --server <name> | --command <ref> [options]\n  inspect-cli   Show metadata and regen instructions for a generated CLI\n    usage: mcporter inspect-cli <path> [--json]\n  emit-ts       Generate TypeScript client/types for a server\n    usage: mcporter emit-ts <server> --mode client|types [options]\n\nConfiguration\n  config  Inspect or edit config files (list, get, add, remove, import, login, logout)\n    usage: mcporter config <command> [options]\n\nDaemon\n  daemon  Manage the keep-alive daemon (start | status | stop | restart)\n    usage: mcporter daemon <subcommand>\n  serve   Expose daemon-managed keep-alive servers as one MCP server\n    usage: mcporter serve [--servers a,b,c] [--stdio | --http <port>]\n\n\nGlobal flags\n  --config <path>                      Path to mcporter.json (defaults to ./config/mcporter.json)\n  --root <path>                        Working directory for stdio servers\n  --log-level <debug|info|warn|error>  Adjust CLI logging (defaults to warn)\n  --oauth-timeout <ms>                 Time to wait for browser-based OAuth before giving up (default 300000)\n\nQuick start\n  mcporter list\n    # show configured servers\n  mcporter list linear --schema\n    # view Linear tool docs\n  mcporter call linear.list_issues limit:5\n    # invoke a tool with key=value arguments\n  mcporter generate-cli --command https://host/mcp --compile ./my-cli\n    # build a standalone CLI/binary\n\nRun `mcporter <command> --help` for detailed flags.\nmcporter auto-loads servers from ./config/mcporter.json and editor imports (Cursor, Claude, Codex, etc.).\n",
+    "stdout_json": false
+  },
+  {
+    "tool": "mcporter",
+    "case": "list",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "list",
+      "fixture",
+      "--json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 15629.51,
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 3643,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "describe",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "list",
+      "fixture",
+      "--schema",
+      "--json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3601.07,
+    "stdout": "{\n  \"mode\": \"server\",\n  \"name\": \"fixture\",\n  \"status\": \"ok\",\n  \"durationMs\": 2679,\n  \"transport\": \"STDIO python.exe RESEARCH_ROOT\\\\evaluation\\\\fixture.py\",\n  \"source\": {\n    \"kind\": \"local\",\n    \"path\": \"RESEARCH_ROOT\\\\evaluation\\\\mcporter.json\"\n  },\n  \"tools\": [\n    {\n      \"name\": \"echo\",\n      \"description\": \"Echo a message and nested JSON without side effects\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"message\": {\n            \"type\": \"string\"\n          },\n          \"payload\": {\n            \"type\": \"object\"\n          }\n        },\n        \"required\": [\n          \"message\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"message\",\n          \"cliName\": \"message\",\n          \"required\": true,\n          \"type\": \"string\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<message>\"\n        },\n        {\n          \"property\": \"payload\",\n          \"cliName\": \"payload\",\n          \"required\": false,\n          \"type\": \"object\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<payload:json>\",\n          \"exampleValue\": \"{\\n  \\\"key\\\": \\\"value\\\"\\n}\"\n        }\n      ]\n    },\n    {\n      \"name\": \"add\",\n      \"description\": \"Add two numbers\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"a\": {\n            \"type\": \"number\"\n          },\n          \"b\": {\n            \"type\": \"number\"\n          }\n        },\n        \"required\": [\n          \"a\",\n          \"b\"\n        ]\n      },\n      \"options\": [\n        {\n          \"property\": \"a\",\n          \"cliName\": \"a\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<a:number>\",\n          \"exampleValue\": \"1\"\n        },\n        {\n          \"property\": \"b\",\n          \"cliName\": \"b\",\n          \"required\": true,\n          \"type\": \"number\",\n          \"strictBooleanArray\": false,\n          \"placeholder\": \"<b:number>\",\n          \"exampleValue\": \"1\"\n        }\n      ]\n    },\n    {\n      \"name\": \"fail\",\n      \"description\": \"Return an MCP tool execution error\",\n      \"inputSchema\": {\n        \"type\": \"object\",\n        \"properties\": {}\n      },\n      \"options\": []\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "call",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.echo",
+      "--args",
+      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 4231.41,
+    "stdout": "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "invalid",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": \"bad\"\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 3779.33,
+    "stdout": "{\n  \"server\": \"fixture\",\n  \"tool\": \"add\",\n  \"error\": \"unknown tool or invalid arguments\",\n  \"issue\": {\n    \"kind\": \"other\",\n    \"rawMessage\": \"unknown tool or invalid arguments\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "tool_error",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.fail",
+      "--args",
+      "{}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 3488.35,
+    "stdout": "{\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"deliberate fixture failure\"\n    }\n  ],\n  \"isError\": true\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "resource",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "resource",
+      "fixture",
+      "fixture://readme",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3192.87,
+    "stdout": "{\n  \"contents\": [\n    {\n      \"uri\": \"fixture://readme\",\n      \"mimeType\": \"text/plain\",\n      \"text\": \"fixture resource\"\n    }\n  ]\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "emit_ts",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "emit-ts",
+      "fixture",
+      "--mode",
+      "client",
+      "--out",
+      "RESEARCH_ROOT\\evaluation\\generated-client.ts"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3475.42,
+    "stdout": "Emitted client + types for fixture \u2192 RESEARCH_ROOT\\evaluation\\generated-client.ts / RESEARCH_ROOT\\evaluation\\generated-client.d.ts\n",
+    "stderr": "",
+    "stdout_json": false
+  },
+  {
+    "tool": "mcporter",
+    "case": "warm_call_0",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3356.22,
+    "stdout": "{\n  \"sum\": 5\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "warm_call_1",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3299.41,
+    "stdout": "{\n  \"sum\": 5\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "warm_call_2",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3713.71,
+    "stdout": "{\n  \"sum\": 5\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "warm_call_3",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3603.21,
+    "stdout": "{\n  \"sum\": 5\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "mcporter",
+    "case": "warm_call_4",
+    "command": [
+      "RESEARCH_ROOT\\runtime\\node_modules\\node\\bin\\node.exe",
+      "RESEARCH_ROOT\\installed\\node_modules\\mcporter\\dist\\cli.js",
+      "--config",
+      "RESEARCH_ROOT\\evaluation\\mcporter.json",
+      "call",
+      "fixture.add",
+      "--args",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}",
+      "--output",
+      "json"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 3524.47,
+    "stdout": "{\n  \"sum\": 5\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "help",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "--help"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 245.91,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"global_help\",\n  \"protocol\": \"cli\",\n  \"endpoint\": \"uxc\",\n  \"data\": {\n    \"about\": \"Universal X-Protocol CLI\",\n    \"commands\": [\n      {\n        \"about\": \"Show global help\",\n        \"name\": \"help\"\n      },\n      {\n        \"about\": \"Import and normalize external runtime configs\",\n        \"name\": \"config\"\n      },\n      {\n        \"about\": \"Manage schema cache\",\n        \"name\": \"cache\"\n      },\n      {\n        \"about\": \"Manage credentials, bindings, and OAuth\",\n        \"name\": \"auth\"\n      },\n      {\n        \"about\": \"Create a host-bound shortcut command\",\n        \"name\": \"link\"\n      },\n      {\n        \"about\": \"Manage local runtime daemon\",\n        \"name\": \"daemon\"\n      },\n      {\n        \"about\": \"Manage daemon-backed source streams\",\n        \"name\": \"source\"\n      },\n      {\n        \"about\": \"Read and maintain durable source streams\",\n        \"name\": \"stream\"\n      },\n      {\n        \"about\": \"Send and reply to email over SMTP\",\n        \"name\": \"email\"\n      }\n    ],\n    \"examples\": [\n      \"uxc -h\",\n      \"uxc <host> -h\",\n      \"uxc <host> --codegen-schema\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> key=value\",\n      \"uxc --auth thegraph --inject-env THEGRAPH_API_KEY={{secret}} \\\"npx -y mcp-remote --header \\\\\\\"Authorization: Bearer ${THEGRAPH_API_KEY}\\\\\\\" https://subgraphs.mcp.thegraph.com/sse\\\" -h\"\n    ],\n    \"notes\": [\n      \"Default output is JSON. Use --text for human-readable output.\",\n      \"For endpoints, use: uxc <host> -h, uxc <host> <operation_id> -h, and uxc <host> <operation_id> ...\",\n      \"Use --codegen-schema to export host-scoped runtime codegen input (without emitter output).\",\n      \"--inject-env NAME={{secret}} is available for stdio endpoints when a credential is supplied.\"\n    ],\n    \"path\": \"uxc\",\n    \"usage\": \"uxc [OPTIONS] [URL] [COMMAND]\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "list",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "-h"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 629.02,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"data\": {\n    \"count\": 3,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"echo\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"echo\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"message\"\n        ],\n        \"summary\": \"Echo a message and nested JSON without side effects\"\n      },\n      {\n        \"display_name\": \"add\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"add\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [\n          \"a\",\n          \"b\"\n        ],\n        \"summary\": \"Add two numbers\"\n      },\n      {\n        \"display_name\": \"fail\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"fail\",\n        \"protocol_kind\": \"tool\",\n        \"required\": [],\n        \"summary\": \"Return an MCP tool execution error\"\n      }\n    ],\n    \"service\": {\n      \"name\": \"skill-cli-fixture\"\n    }\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 394,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": true,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "describe",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "echo",
+      "-h"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 249.01,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"operation_detail\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"description\": \"Echo a message and nested JSON without side effects\",\n    \"display_name\": \"echo\",\n    \"input_schema\": {\n      \"properties\": {\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"payload\": {\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"message\"\n      ],\n      \"type\": \"object\"\n    },\n    \"invocation_examples\": [\n      \"uxc <host> echo message=value\"\n    ],\n    \"operation_id\": \"echo\",\n    \"parameters\": [\n      {\n        \"description\": null,\n        \"name\": \"message\",\n        \"param_type\": \"string\",\n        \"required\": true\n      },\n      {\n        \"description\": null,\n        \"name\": \"payload\",\n        \"param_type\": \"object\",\n        \"required\": false\n      }\n    ],\n    \"return_type\": \"ToolContent\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 0,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "call",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "echo",
+      "{\n  \"message\": \"hello agent\",\n  \"payload\": {\n    \"items\": [\n      1,\n      true,\n      null\n    ]\n  }\n}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 420.94,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"echo\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"{\\n  \\\"message\\\": \\\"hello agent\\\",\\n  \\\"payload\\\": {\\n    \\\"items\\\": [\\n      1,\\n      true,\\n      null\\n    ]\\n  }\\n}\",\n        \"type\": \"text\"\n      }\n    ],\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 289,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 0,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": false\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "invalid",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": \"bad\"\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 262.61,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Invalid arguments: Invalid value at $.b: missing required field\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "tool_error",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "fail",
+      "{}"
+    ],
+    "exit_code": 0,
+    "elapsed_ms": 234.98,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"mcp\",\n  \"endpoint\": \"python3 'RESEARCH_ROOT/evaluation/fixture.py'\",\n  \"operation\": \"fail\",\n  \"data\": {\n    \"content\": [\n      {\n        \"text\": \"deliberate fixture failure\",\n        \"type\": \"text\"\n      }\n    ],\n    \"isError\": true,\n    \"resultType\": \"complete\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 6,\n    \"schema_involved\": true,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false,\n    \"daemon_session_reused\": true\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "warm_call_0",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 224.37,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "warm_call_1",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 227.59,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "warm_call_2",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 359.85,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "warm_call_3",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 228.32,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  },
+  {
+    "tool": "uxc",
+    "case": "warm_call_4",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "python3 'RESEARCH_ROOT/evaluation/fixture.py'",
+      "add",
+      "{\n  \"a\": 2,\n  \"b\": 3\n}"
+    ],
+    "exit_code": 1,
+    "elapsed_ms": 204.46,
+    "stdout": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"INVALID_ARGUMENT\",\n    \"message\": \"Invalid arguments: Unknown argument '\\\"a\\\":2' for operation 'add'.\\n\\nHint: Use key=value for scalar fields:\\n  uxc <host> add key1=value1 key2=value2\\n\\nUse path-style keys for nested fields:\\n  uxc <host> add filter.status=active items[0].id=1\\n\\nUse := for per-field JSON values:\\n  uxc <host> add filter:='{\\\"status\\\":\\\"active\\\"}' tags:='[\\\"rust\\\",\\\"cli\\\"]'\\n\\nOr pass one full JSON object:\\n  uxc <host> add '{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"}'\"\n  },\n  \"meta\": {\n    \"version\": \"v1\"\n  }\n}",
+    "stderr": "",
+    "stdout_json": true
+  }
+]

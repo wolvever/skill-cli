@@ -1,0 +1,22 @@
+openapi: 3.0.3
+info:
+  title: Example pet API
+  version: "1.0"
+paths:
+  /pets/{id}:
+    get:
+      operationId: getPet
+      summary: Retrieve a pet by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: verbose
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Pet details

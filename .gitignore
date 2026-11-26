@@ -1,0 +1,7 @@
+/bin/
+/dist/
+/skill-cli.json
+*.exe
+*.test
+coverage.out
+.env

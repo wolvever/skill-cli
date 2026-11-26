@@ -1,0 +1,362 @@
+[
+  {
+    "case": "list",
+    "exit_code": 0,
+    "elapsed_ms": 104.05,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "name": "demo",
+          "type": "mcp"
+        },
+        {
+          "name": "legacy",
+          "type": "mcp"
+        },
+        {
+          "name": "pets",
+          "type": "openapi"
+        },
+        {
+          "name": "rest",
+          "type": "http"
+        },
+        {
+          "name": "stdio",
+          "type": "mcp"
+        }
+      ]
+    }
+  },
+  {
+    "case": "discover",
+    "exit_code": 0,
+    "elapsed_ms": 102.4,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "id": "demo.add",
+          "description": "Add two numbers",
+          "protocol": "mcp",
+          "annotations": null
+        },
+        {
+          "id": "demo.echo",
+          "description": "Echo a message and optional nested JSON",
+          "protocol": "mcp",
+          "annotations": null
+        },
+        {
+          "id": "demo.fail",
+          "description": "Return a tool execution error",
+          "protocol": "mcp",
+          "annotations": null
+        }
+      ]
+    }
+  },
+  {
+    "case": "search",
+    "exit_code": 0,
+    "elapsed_ms": 103.04,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "id": "demo.add",
+          "description": "Add two numbers",
+          "protocol": "mcp",
+          "annotations": null
+        }
+      ]
+    }
+  },
+  {
+    "case": "describe",
+    "exit_code": 0,
+    "elapsed_ms": 195.78,
+    "output": {
+      "ok": true,
+      "data": {
+        "id": "demo.add",
+        "description": "Add two numbers",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "a": {
+              "type": "number"
+            },
+            "b": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      }
+    }
+  },
+  {
+    "case": "demo_call",
+    "exit_code": 0,
+    "elapsed_ms": 171.77,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"sum\":5}"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        }
+      }
+    }
+  },
+  {
+    "case": "legacy_call",
+    "exit_code": 0,
+    "elapsed_ms": 235.34,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"sum\":5}"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        }
+      }
+    }
+  },
+  {
+    "case": "stdio_call",
+    "exit_code": 0,
+    "elapsed_ms": 284.39,
+    "output": {
+      "ok": true,
+      "data": {
+        "_meta": {
+          "io.modelcontextprotocol/serverInfo": {
+            "name": "skill-cli-demo",
+            "version": "1"
+          }
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"sum\":5}"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        },
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "nested_stdin",
+    "exit_code": 0,
+    "elapsed_ms": 217.95,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"message\":\"hello\",\"payload\":{\"items\":[1,true,null]}}"
+          }
+        ],
+        "structuredContent": {
+          "message": "hello",
+          "payload": {
+            "items": [
+              1,
+              true,
+              null
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "case": "tool_error",
+    "exit_code": 1,
+    "elapsed_ms": 185.63,
+    "output": {
+      "ok": false,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "deliberate demo error"
+          }
+        ],
+        "isError": true
+      },
+      "error": "MCP tool reported an execution error; inspect data.content"
+    }
+  },
+  {
+    "case": "invalid_input",
+    "exit_code": 1,
+    "elapsed_ms": 171.11,
+    "output": {
+      "ok": false,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "validating \"arguments\": validating root: validating /properties/a: type: bad has type \"string\", want \"number\""
+          }
+        ],
+        "isError": true
+      },
+      "error": "MCP tool reported an execution error; inspect data.content"
+    }
+  },
+  {
+    "case": "openapi_call",
+    "exit_code": 0,
+    "elapsed_ms": 138.62,
+    "output": {
+      "ok": true,
+      "data": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "id": "42",
+          "name": "Mochi",
+          "verbose": "true"
+        }
+      }
+    }
+  },
+  {
+    "case": "raw_http",
+    "exit_code": 0,
+    "elapsed_ms": 152.68,
+    "output": {
+      "ok": true,
+      "data": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "id": "42",
+          "name": "Mochi",
+          "verbose": ""
+        }
+      }
+    }
+  },
+  {
+    "case": "thin_gateway_list",
+    "exit_code": 0,
+    "elapsed_ms": 100.02,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "name": "demo",
+          "type": "mcp"
+        },
+        {
+          "name": "legacy",
+          "type": "mcp"
+        },
+        {
+          "name": "pets",
+          "type": "openapi"
+        },
+        {
+          "name": "rest",
+          "type": "http"
+        },
+        {
+          "name": "stdio",
+          "type": "mcp"
+        }
+      ]
+    }
+  },
+  {
+    "case": "gateway_call_0",
+    "exit_code": 0,
+    "elapsed_ms": 108.17,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "text": "{\"sum\":5}",
+            "type": "text"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        }
+      }
+    }
+  },
+  {
+    "case": "gateway_call_1",
+    "exit_code": 0,
+    "elapsed_ms": 95.9,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "text": "{\"sum\":5}",
+            "type": "text"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        }
+      }
+    }
+  },
+  {
+    "case": "gateway_call_2",
+    "exit_code": 0,
+    "elapsed_ms": 99.95,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "text": "{\"sum\":5}",
+            "type": "text"
+          }
+        ],
+        "structuredContent": {
+          "sum": 5
+        }
+      }
+    }
+  },
+  {
+    "case": "gateway_allowlist",
+    "exit_code": 1,
+    "elapsed_ms": 98.28,
+    "output": {
+      "ok": false,
+      "error": "gateway: operation denied by provider allowlist"
+    }
+  }
+]

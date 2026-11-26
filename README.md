@@ -1,0 +1,115 @@
+# skill-cli
+
+A Go CLI for AI agents to discover, inspect, and invoke external capabilities without placing an entire tool catalog in model context.
+
+**Working alpha.** Supports MCP over stdio, Streamable HTTP and legacy SSE; OpenAPI 3.0 JSON/YAML; and direct HTTP requests. An optional authenticated loopback gateway retains MCP connections and resolves provider credentials outside the calling CLI.
+
+## Try it locally
+
+Requires Go 1.25 or newer to build. The resulting executable needs no Go, Node, or Python runtime. A configured stdio server may require its own runtime.
+
+```sh
+go build -o bin/skill-cli ./cmd/skill-cli
+go run ./examples/demo-server --listen 127.0.0.1:8080
+```
+
+In another terminal:
+
+```sh
+bin/skill-cli --config examples/demo.json list
+bin/skill-cli --config examples/demo.json list demo
+bin/skill-cli --config examples/demo.json search add
+bin/skill-cli --config examples/demo.json describe demo.add
+bin/skill-cli --config examples/demo.json call demo.add --args '{"a":2,"b":3}'
+bin/skill-cli --config examples/demo.json call legacy.add --args '{"a":2,"b":3}'
+bin/skill-cli --config examples/demo.json call pets.getPet --args '{"id":"42","verbose":true}'
+bin/skill-cli --config examples/demo.json request rest GET /pets/42
+```
+
+On Windows, build `bin/skill-cli.exe` and invoke `./bin/skill-cli.exe`. JSON files avoid differences in shell quoting:
+
+```sh
+skill-cli call demo.echo --args @args.json
+cat args.json | skill-cli call demo.echo --args -
+```
+
+In PowerShell, pipe with `Get-Content -Raw args.json`. No demo operation changes external state or needs credentials. `examples/skill-cli.json` shows real-service configuration patterns and requires adapting the local server path and credentials.
+
+## Agent interface
+
+| Command | Contract |
+| --- | --- |
+| `list` | Configured provider names and protocols; does not connect |
+| `list <provider>` | Operation IDs and descriptions, without schemas |
+| `search <text> [--provider name]` | Case-insensitive substring discovery |
+| `describe <provider.operation>` | One input schema and available output schema/annotations |
+| `call <provider.operation> --args JSON\|@file\|-` | Invoke once with a JSON object |
+| `request <provider> <method> </path> [--args ...]` | HTTP request against a configured base URL |
+| `serve` | Persistent gateway for one trusted configuration and principal |
+
+Operational stdout is exactly one JSON envelope. Help/version are plain text. Both protocol errors and MCP `isError` results exit **1**, preserving tool-error data when available:
+
+```json
+{"ok":true,"data":{"structuredContent":{"sum":5}}}
+```
+
+The exact MCP result may also contain content blocks and protocol metadata. HTTP results contain `status`, `contentType`, and `body`. Errors use `{"ok":false,"error":"..."}`, optionally with `data`. MCP content is preserved rather than guessing whether a text block should be decoded as JSON.
+
+`--timeout 30s` covers connection setup and invocation. `--max-bytes 16777216` bounds CLI input/output, HTTP response bodies, spec files, gateway payloads, and individual MCP HTTP SSE events. It is **not** a pre-allocation memory limit for SDK-decoded MCP stdio results or a limit on the number of discovered schemas. A timeout can leave an unknown execution outcome. Calls and multi-round continuations are never automatically replayed.
+
+## Providers and credentials
+
+```json
+{
+  "providers": {
+    "docs": {"type":"mcp","transport":"http","url":"https://example.com/mcp","bearer_env":"DOCS_TOKEN","allow":["search"]},
+    "local": {"type":"mcp","transport":"stdio","command":["python","/absolute/server.py"],"env":{"API_KEY":"LOCAL_API_KEY"}},
+    "api": {"type":"openapi","spec":"./api.yaml","url":"https://api.example.com","headers_env":{"X-API-Key":"API_KEY"}},
+    "rest": {"type":"http","url":"https://api.example.com","bearer_env":"API_TOKEN"}
+  }
+}
+```
+
+Spec file paths resolve relative to the configuration file. Stdio arguments are an executable plus an argument array, without an implicit shell. Working directory is the process working directory. Environment bindings map child variable names to host variable names; other process environment variables are inherited. Use executable programs such as `node` or `python` on Windows; invoke batch scripts explicitly through a shell only when needed.
+
+Credentials are environment variable **names**, not values in configuration or command arguments. They are resolved on each HTTP request. Remote spec downloads are unauthenticated; download authenticated specs separately. HTTP redirects and cross-origin credential forwarding are refused. Explicit plaintext provider HTTP URLs are allowed; use HTTPS for remote credentials.
+
+An optional nonempty `allow` list hides and denies every operation not listed, including gateway calls. Omitting it (or setting an empty list) permits all operations. Raw HTTP requests are disabled for providers with an operation allowlist so they cannot bypass it. Configure a provider URL explicitly when the API spec should not select the destination. Treat configs, specs, and stdio executables as trusted operator input.
+
+## Persistent gateway
+
+Start one gateway per principal/security context. In the trusted host environment, set provider credentials and a random `SKILL_CLI_GATEWAY_TOKEN` of at least 24 characters, then:
+
+```sh
+skill-cli --config skill-cli.json serve --listen 127.0.0.1:7331
+```
+
+The calling environment needs the gateway URL and gateway token:
+
+```sh
+skill-cli --gateway http://127.0.0.1:7331 list
+skill-cli --gateway http://127.0.0.1:7331 call docs.search --args @args.json
+```
+
+No local provider config is read in gateway mode. The foreground service lazily opens one MCP session per configured provider and retains it until shutdown. Requests share those sessions; tool catalogs are queried live, without a disk schema cache. OpenAPI documents are loaded once per provider per gateway lifetime. Restart to load config/spec changes or recover a broken MCP session; this alpha does not implement automatic reconnect, OAuth refresh, idle eviction, or multiple principals.
+
+The gateway binds only to loopback, validates Host, rejects browser Origins, limits request sizes/deadlines, and authenticates every invocation. It does not itself create sandbox network isolation. Reaching a gateway in another container requires an operator-managed authenticated/TLS bridge; do not expose loopback through an unauthenticated port forward. The gateway token grants the configured capability set and is itself sensitive. This is a building block, not a production multitenant credential vault, policy engine, or sandbox escape boundary.
+
+## OpenAPI support and current limits
+
+OpenAPI 3.0 JSON/YAML supports operation IDs (fallback: `get:/path`), path/query/header scalar parameters, JSON object bodies, request validation, internal references, and configured/environment authentication. `describe` bundles only transitively referenced schema components. Parameter location/name collisions and body-name collisions fail explicitly. Path/operation server overrides, cookie/array/object parameters, multipart, arbitrary scalar/array bodies, external references, Swagger 2, and OpenAPI 3.1+ are not implemented. Unsupported parameter forms fail before invocation when supplied. `securitySchemes` do not automatically authenticate; use explicit environment bindings.
+
+GraphQL, gRPC, general JSON-RPC, semantic search, SDK/CLI generation, result storage, async tasks, prompts/resources/subscriptions, OAuth/keychain integration, cross-principal session pools, audit logging, rate limits, and approval policies remain roadmap items. Protocol-specific interfaces should own those lifecycle features rather than overloading synchronous invocation.
+
+## Development and provenance
+
+```sh
+go vet ./...
+go test ./...
+go test -race ./... # requires a supported C toolchain
+go build ./cmd/skill-cli
+```
+
+Tests exercise stdio, Streamable HTTP and legacy SSE against the official Go MCP SDK, nested JSON, session retention, tool errors, OpenAPI validation/encoding, HTTP deadlines and size limits, redirect/credential boundaries, gateway authentication/allowlists, and CLI output. CI runs on Linux, Windows, and macOS, with a Linux race check.
+
+The [hands-on evaluation](docs/research/evaluation.md) explains the ranking and implementation choices. Design references: [UXC](https://github.com/holon-run/uxc) for protocol adapters and compact discovery, [mcpc](https://github.com/apify/mcpc) for session lifecycle and error semantics, [MCPorter](https://github.com/openclaw/mcporter) for embedding/code generation, and [mcp-cli](https://github.com/philschmid/mcp-cli) for a small agent-facing command surface. This implementation uses the [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and [kin-openapi](https://github.com/getkin/kin-openapi); it does not copy the reference projects' implementations.

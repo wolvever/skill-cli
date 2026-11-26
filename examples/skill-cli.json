@@ -1,0 +1,25 @@
+{
+  "providers": {
+    "deepwiki": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "filesystem": {
+      "type": "mcp",
+      "transport": "stdio",
+      "command": ["node", "/absolute/path/to/server-filesystem/dist/index.js", "."],
+      "allow": ["read_file", "list_directory"]
+    },
+    "pets": {
+      "type": "openapi",
+      "spec": "petstore.yaml",
+      "url": "http://127.0.0.1:8080"
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.github.com",
+      "bearer_env": "GITHUB_TOKEN"
+    }
+  }
+}

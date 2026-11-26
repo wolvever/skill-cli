@@ -1,0 +1,62 @@
+[
+  {
+    "tool": "uxc",
+    "case": "openapi_list",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "--schema-url",
+      "http://127.0.0.1:18763/openapi.json",
+      "http://127.0.0.1:18763",
+      "-h"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"host_help\",\n  \"protocol\": \"openapi\",\n  \"endpoint\": \"http://127.0.0.1:18763\",\n  \"data\": {\n    \"count\": 2,\n    \"examples\": [\n      \"uxc <host> -h\",\n      \"uxc <host> <operation_id> -h\",\n      \"uxc <host> <operation_id> id=42\",\n      \"uxc <host> <operation_id> '{...}'\"\n    ],\n    \"operations\": [\n      {\n        \"display_name\": \"POST /echo\",\n        \"input_shape_hint\": \"none\",\n        \"operation_id\": \"post:/echo\",\n        \"protocol_kind\": \"http_operation\",\n        \"required\": [],\n        \"summary\": \"Echo JSON body\"\n      },\n      {\n        \"display_name\": \"GET /pets/{id}\",\n        \"input_shape_hint\": \"required\",\n        \"operation_id\": \"get:/pets/{id}\",\n        \"protocol_kind\": \"http_operation\",\n        \"required\": [\n          \"id\"\n        ],\n        \"summary\": \"Get a pet\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 0,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 106000,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stderr": "",
+    "elapsed_ms": 198.91
+  },
+  {
+    "tool": "uxc",
+    "case": "openapi_describe",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "--schema-url",
+      "http://127.0.0.1:18763/openapi.json",
+      "http://127.0.0.1:18763",
+      "get:/pets/{id}",
+      "-h"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"operation_detail\",\n  \"protocol\": \"openapi\",\n  \"endpoint\": \"http://127.0.0.1:18763\",\n  \"operation\": \"get:/pets/{id}\",\n  \"data\": {\n    \"description\": \"Get a pet\",\n    \"display_name\": \"GET /pets/{id}\",\n    \"input_schema\": null,\n    \"invocation_examples\": [\n      \"uxc <host> get:/pets/{id} id=value\"\n    ],\n    \"operation_id\": \"get:/pets/{id}\",\n    \"parameters\": [\n      {\n        \"description\": null,\n        \"name\": \"id\",\n        \"param_type\": \"string\",\n        \"required\": true\n      },\n      {\n        \"description\": null,\n        \"name\": \"verbose\",\n        \"param_type\": \"boolean\",\n        \"required\": false\n      }\n    ],\n    \"return_type\": null\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 0,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 106000,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stderr": "",
+    "elapsed_ms": 188.03
+  },
+  {
+    "tool": "uxc",
+    "case": "openapi_call",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/tmp/skill-cli-eval/uxc-v0.23.1-x86_64-unknown-linux-musl/uxc",
+      "--schema-url",
+      "http://127.0.0.1:18763/openapi.json",
+      "http://127.0.0.1:18763",
+      "get:/pets/{id}",
+      "id=42",
+      "verbose=true"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"kind\": \"call_result\",\n  \"protocol\": \"openapi\",\n  \"endpoint\": \"http://127.0.0.1:18763\",\n  \"operation\": \"get:/pets/{id}\",\n  \"data\": {\n    \"id\": \"42\",\n    \"name\": \"Mochi\",\n    \"query\": \"verbose=true\"\n  },\n  \"meta\": {\n    \"version\": \"v1\",\n    \"duration_ms\": 3,\n    \"schema_involved\": true,\n    \"cache_source\": \"schema_cache\",\n    \"cache_age_ms\": 106000,\n    \"cache_stale\": false,\n    \"cache_fallback\": false,\n    \"daemon_used\": true,\n    \"daemon_autostarted\": false,\n    \"daemon_restarted_for_version_mismatch\": false\n  }\n}",
+    "stderr": "",
+    "elapsed_ms": 194.24
+  }
+]
