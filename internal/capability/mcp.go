@@ -21,7 +21,7 @@ func newMCP(ctx context.Context, c ProviderConfig, maxBytes int64) (Provider, er
 		for name, envName := range c.Env {
 			v, ok := os.LookupEnv(envName)
 			if !ok {
-				return nil, errors.New("required stdio environment variable is unset: " + envName)
+				return nil, NewFault("AUTH_FAILED", "required stdio environment variable is unset: "+envName, "Set the required variable in the trusted host environment.", nil)
 			}
 			cmd.Env = append(cmd.Env, name+"="+v)
 		}
@@ -42,7 +42,11 @@ func newMCP(ctx context.Context, c ProviderConfig, maxBytes int64) (Provider, er
 	}
 	session, err := client.Connect(ctx, transport, nil)
 	if err != nil {
-		return nil, err
+		var fault *Fault
+		if errors.As(err, &fault) {
+			return nil, err
+		}
+		return nil, NewFault("PROVIDER_UNAVAILABLE", err.Error(), "Check the configured server command or endpoint. Do not replay an uncertain mutation.", err)
 	}
 	return &mcpProvider{session}, nil
 }
@@ -65,7 +69,7 @@ func (p *mcpProvider) Invoke(ctx context.Context, op string, args map[string]any
 		return nil, err
 	}
 	if result.IsError {
-		return result, errors.New("MCP tool reported an execution error; inspect data.content")
+		return result, NewFault("TOOL_ERROR", "MCP tool reported an execution error; inspect data.content", "Inspect data.content and correct the request; do not blindly replay a mutation.", nil)
 	}
 	return result, nil
 }

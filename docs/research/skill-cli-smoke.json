@@ -2,13 +2,17 @@
   {
     "case": "list",
     "exit_code": 0,
-    "elapsed_ms": 104.05,
+    "elapsed_ms": 213.6,
     "output": {
       "ok": true,
       "data": [
         {
           "name": "demo",
           "type": "mcp"
+        },
+        {
+          "name": "issues",
+          "type": "openapi"
         },
         {
           "name": "legacy",
@@ -32,7 +36,7 @@
   {
     "case": "discover",
     "exit_code": 0,
-    "elapsed_ms": 102.4,
+    "elapsed_ms": 115.86,
     "output": {
       "ok": true,
       "data": [
@@ -53,6 +57,12 @@
           "description": "Return a tool execution error",
           "protocol": "mcp",
           "annotations": null
+        },
+        {
+          "id": "demo.search_issues",
+          "description": "Search demo issues by query",
+          "protocol": "mcp",
+          "annotations": null
         }
       ]
     }
@@ -60,7 +70,7 @@
   {
     "case": "search",
     "exit_code": 0,
-    "elapsed_ms": 103.04,
+    "elapsed_ms": 106.31,
     "output": {
       "ok": true,
       "data": [
@@ -74,9 +84,31 @@
     }
   },
   {
+    "case": "bounded_search",
+    "exit_code": 0,
+    "elapsed_ms": 109.21,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "id": "demo.add",
+          "description": "Add two numbers",
+          "protocol": "mcp",
+          "annotations": null
+        },
+        {
+          "id": "demo.echo",
+          "description": "Echo a message and optional nested JSON",
+          "protocol": "mcp",
+          "annotations": null
+        }
+      ]
+    }
+  },
+  {
     "case": "describe",
     "exit_code": 0,
-    "elapsed_ms": 195.78,
+    "elapsed_ms": 93.37,
     "output": {
       "ok": true,
       "data": {
@@ -106,7 +138,7 @@
   {
     "case": "demo_call",
     "exit_code": 0,
-    "elapsed_ms": 171.77,
+    "elapsed_ms": 80.15,
     "output": {
       "ok": true,
       "data": {
@@ -125,7 +157,7 @@
   {
     "case": "legacy_call",
     "exit_code": 0,
-    "elapsed_ms": 235.34,
+    "elapsed_ms": 85.47,
     "output": {
       "ok": true,
       "data": {
@@ -144,7 +176,7 @@
   {
     "case": "stdio_call",
     "exit_code": 0,
-    "elapsed_ms": 284.39,
+    "elapsed_ms": 114.92,
     "output": {
       "ok": true,
       "data": {
@@ -170,7 +202,7 @@
   {
     "case": "nested_stdin",
     "exit_code": 0,
-    "elapsed_ms": 217.95,
+    "elapsed_ms": 77.79,
     "output": {
       "ok": true,
       "data": {
@@ -196,7 +228,7 @@
   {
     "case": "tool_error",
     "exit_code": 1,
-    "elapsed_ms": 185.63,
+    "elapsed_ms": 97.15,
     "output": {
       "ok": false,
       "data": {
@@ -208,13 +240,15 @@
         ],
         "isError": true
       },
-      "error": "MCP tool reported an execution error; inspect data.content"
+      "error": "MCP tool reported an execution error; inspect data.content",
+      "code": "TOOL_ERROR",
+      "hint": "Inspect data.content and correct the request; do not blindly replay a mutation."
     }
   },
   {
     "case": "invalid_input",
     "exit_code": 1,
-    "elapsed_ms": 171.11,
+    "elapsed_ms": 84.41,
     "output": {
       "ok": false,
       "data": {
@@ -226,13 +260,15 @@
         ],
         "isError": true
       },
-      "error": "MCP tool reported an execution error; inspect data.content"
+      "error": "MCP tool reported an execution error; inspect data.content",
+      "code": "TOOL_ERROR",
+      "hint": "Inspect data.content and correct the request; do not blindly replay a mutation."
     }
   },
   {
     "case": "openapi_call",
     "exit_code": 0,
-    "elapsed_ms": 138.62,
+    "elapsed_ms": 101.9,
     "output": {
       "ok": true,
       "data": {
@@ -249,7 +285,7 @@
   {
     "case": "raw_http",
     "exit_code": 0,
-    "elapsed_ms": 152.68,
+    "elapsed_ms": 91.51,
     "output": {
       "ok": true,
       "data": {
@@ -264,15 +300,132 @@
     }
   },
   {
+    "case": "issue_search_mcp",
+    "exit_code": 0,
+    "elapsed_ms": 95.08,
+    "output": {
+      "ok": true,
+      "data": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"issues\":[{\"id\":42,\"title\":\"Fix login\"}],\"limit\":2,\"query\":\"\u767b\u5f55 login\"}"
+          }
+        ],
+        "structuredContent": {
+          "issues": [
+            {
+              "id": 42,
+              "title": "Fix login"
+            }
+          ],
+          "limit": 2,
+          "query": "\u767b\u5f55 login"
+        }
+      }
+    }
+  },
+  {
+    "case": "issue_search_openapi",
+    "exit_code": 0,
+    "elapsed_ms": 116.1,
+    "output": {
+      "ok": true,
+      "data": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "issues": [
+            {
+              "id": 42,
+              "title": "Fix login"
+            }
+          ],
+          "limit": 2,
+          "query": "\u767b\u5f55 login"
+        }
+      }
+    }
+  },
+  {
+    "case": "http_query_header_array",
+    "exit_code": 0,
+    "elapsed_ms": 87.7,
+    "output": {
+      "ok": true,
+      "data": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "body": [
+            9007199254740993,
+            true,
+            null
+          ],
+          "mode": "safe",
+          "query": {
+            "tag": [
+              "a b",
+              "x&y"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "case": "http_null",
+    "exit_code": 0,
+    "elapsed_ms": 84.89,
+    "output": {
+      "ok": true,
+      "data": {
+        "status": 200,
+        "contentType": "application/json",
+        "body": {
+          "body": null,
+          "mode": "",
+          "query": {}
+        }
+      }
+    }
+  },
+  {
+    "case": "http_credential_override",
+    "exit_code": 1,
+    "elapsed_ms": 86.98,
+    "output": {
+      "ok": false,
+      "error": "credential headers must use provider environment bindings",
+      "code": "INVALID_ARGUMENT",
+      "hint": "Inspect --help or describe the operation, then correct the input."
+    }
+  },
+  {
+    "case": "unknown_provider",
+    "exit_code": 1,
+    "elapsed_ms": 72.32,
+    "output": {
+      "ok": false,
+      "error": "unknown provider \"missing\"; run skill-cli list",
+      "code": "NOT_FOUND",
+      "hint": "Run skill-cli list to discover configured providers."
+    }
+  },
+  {
     "case": "thin_gateway_list",
     "exit_code": 0,
-    "elapsed_ms": 100.02,
+    "elapsed_ms": 72.5,
     "output": {
       "ok": true,
       "data": [
         {
           "name": "demo",
           "type": "mcp"
+        },
+        {
+          "name": "issues",
+          "type": "openapi"
         },
         {
           "name": "legacy",
@@ -296,7 +449,7 @@
   {
     "case": "gateway_call_0",
     "exit_code": 0,
-    "elapsed_ms": 108.17,
+    "elapsed_ms": 91.46,
     "output": {
       "ok": true,
       "data": {
@@ -315,7 +468,7 @@
   {
     "case": "gateway_call_1",
     "exit_code": 0,
-    "elapsed_ms": 95.9,
+    "elapsed_ms": 80.99,
     "output": {
       "ok": true,
       "data": {
@@ -334,7 +487,7 @@
   {
     "case": "gateway_call_2",
     "exit_code": 0,
-    "elapsed_ms": 99.95,
+    "elapsed_ms": 87.6,
     "output": {
       "ok": true,
       "data": {
@@ -353,10 +506,60 @@
   {
     "case": "gateway_allowlist",
     "exit_code": 1,
-    "elapsed_ms": 98.28,
+    "elapsed_ms": 101.98,
     "output": {
       "ok": false,
-      "error": "gateway: operation denied by provider allowlist"
+      "error": "gateway: operation denied by provider allowlist",
+      "code": "PERMISSION_DENIED",
+      "hint": "Use an allowed operation or have the operator update the provider policy."
+    }
+  },
+  {
+    "case": "gateway_http_options",
+    "exit_code": 0,
+    "elapsed_ms": 103.98,
+    "output": {
+      "ok": true,
+      "data": {
+        "body": {
+          "body": [
+            9007199254740993,
+            true,
+            null
+          ],
+          "mode": "safe",
+          "query": {
+            "tag": [
+              "a b",
+              "x&y"
+            ]
+          }
+        },
+        "contentType": "application/json",
+        "status": 200
+      }
+    }
+  },
+  {
+    "case": "gateway_search_limit",
+    "exit_code": 0,
+    "elapsed_ms": 115.58,
+    "output": {
+      "ok": true,
+      "data": [
+        {
+          "annotations": null,
+          "description": "Add two numbers",
+          "id": "demo.add",
+          "protocol": "mcp"
+        },
+        {
+          "annotations": null,
+          "description": "Echo a message and optional nested JSON",
+          "id": "demo.echo",
+          "protocol": "mcp"
+        }
+      ]
     }
   }
 ]

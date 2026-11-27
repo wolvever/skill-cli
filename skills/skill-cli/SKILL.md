@@ -13,7 +13,7 @@ Use `skill-cli` on PATH, a supplied executable path, or `SKILL_CLI_BIN` if provi
 
 ```sh
 skill-cli --config providers.json list
-skill-cli --config providers.json search "search" --provider docs
+skill-cli --config providers.json search "search" --provider docs --limit 10
 skill-cli --config providers.json describe docs.search
 skill-cli --config providers.json call docs.search --args @args.json
 ```
@@ -26,7 +26,7 @@ For an unfamiliar operation, read `describe` before constructing its arguments. 
 
 Prefer `--args @file.json` or stdin (`--args -`) for nested JSON and shell portability. In PowerShell, use `Get-Content -Raw args.json | ... --args -`; in POSIX shells use `cat args.json | ... --args -`. Arguments must be a JSON object. OpenAPI JSON request bodies go under a `body` argument.
 
-Operational stdout is one envelope: `{"ok":true,"data":...}` or `{"ok":false,"error":"...","data":...}`. Exit status is nonzero for invocation failures, including MCP `isError` results. Preserve useful error data. MCP `data` can contain `content` blocks and/or `structuredContent`; HTTP `data` contains `status`, `contentType`, and `body`. Do not assume every text block is JSON.
+Operational stdout is one envelope: `{"ok":true,"data":...}` or `{"ok":false,"error":"...","code":"...","hint":"...","data":...}`. Exit status is nonzero for invocation failures, including MCP `isError` results. Use the machine-readable code and hint and preserve useful error data. MCP `data` can contain `content` blocks and/or `structuredContent`; HTTP `data` contains `status`, `contentType`, and `body`. Do not assume every text block is JSON.
 
 Keep large outputs in a local file and parse/filter them in code before returning relevant records to the model. Filtering reduces model context only if the original full output is not also displayed. Count discovery, schema inspection, shell commands, tool outputs, and retries when comparing token use.
 
@@ -34,8 +34,8 @@ Calls are never automatically replayed. After a timeout or disconnect, the opera
 
 ## Other modes
 
-`request <provider> <METHOD> </path>` sends an HTTP request to a configured HTTP/OpenAPI base URL. It cannot bypass an operation allowlist. Preserve the user's authorization when choosing a method.
+`request <provider> <METHOD> </path>` sends an HTTP request to a configured HTTP/OpenAPI base URL. Use repeated `--query key=value`, non-credential `--header Name=value`, and `--body @file.json` or `--body -` for any JSON body type. Credential and connection-routing header overrides are rejected; bind secrets through provider configuration. It cannot bypass an operation allowlist. Preserve the user's authorization when choosing a method.
 
 For repeated calls, use an already configured `--gateway URL`; it avoids reopening MCP sessions on each CLI invocation. Gateway mode does not read the local provider config. Credentials remain in the gateway host; the caller needs a gateway token in the named environment variable. Do not start or reuse a gateway across different principals.
 
-Read [configuration.md](references/configuration.md) when setting up providers, authentication, or a new gateway. OpenAPI support is currently 3.0 JSON/YAML with scalar parameters and JSON object bodies. Swagger 2, OpenAPI 3.1+, OAuth setup, GraphQL/gRPC, and MCP resources/prompts/tasks are not exposed by this alpha; use a suitable authorized alternative or report the limitation.
+Read [configuration.md](references/configuration.md) when setting up providers, authentication, or a new gateway. OpenAPI support is currently 3.0 JSON/YAML with scalar parameters and JSON bodies validated against the schema. Swagger 2, OpenAPI 3.1+, OAuth setup, GraphQL/gRPC, and MCP resources/prompts/tasks are not exposed by this alpha; use a suitable authorized alternative or report the limitation.

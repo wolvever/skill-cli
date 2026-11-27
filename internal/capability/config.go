@@ -1,8 +1,10 @@
 package capability
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -23,14 +25,25 @@ type ProviderConfig struct {
 	Allow      []string          `json:"allow,omitempty"`
 }
 
-func LoadConfig(path string) (Config, error) {
-	var c Config
+func LoadConfig(path string) (c Config, err error) {
+	defer func() {
+		if err != nil {
+			if _, ok := err.(*Fault); !ok {
+				err = NewFault("CONFIG_ERROR", err.Error(), "Correct the provider configuration fields.", err)
+			}
+		}
+	}()
 	b, err := os.ReadFile(path)
 	if err != nil {
-		return c, fmt.Errorf("read config: %w", err)
+		return c, NewFault("CONFIG_ERROR", fmt.Sprintf("read config: %v", err), "Supply --config with an existing provider configuration file.", err)
 	}
-	if err = json.Unmarshal(b, &c); err != nil {
-		return c, fmt.Errorf("invalid config: %w", err)
+	decoder := json.NewDecoder(bytes.NewReader(b))
+	decoder.DisallowUnknownFields()
+	if err = decoder.Decode(&c); err != nil {
+		return c, NewFault("CONFIG_ERROR", fmt.Sprintf("invalid config: %v", err), "Correct the provider configuration fields.", err)
+	}
+	if decoder.Decode(new(any)) != io.EOF || c.Providers == nil {
+		return c, NewFault("CONFIG_ERROR", "config must be one JSON object containing providers", "Use the documented providers configuration format.", nil)
 	}
 	valid := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
 	for name, p := range c.Providers {

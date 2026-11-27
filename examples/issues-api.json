@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Issue search demo", "version": "1.0.0"},
+  "paths": {
+    "/issues": {
+      "get": {
+        "operationId": "searchIssues",
+        "summary": "Search demo issues",
+        "parameters": [
+          {"name":"query","in":"query","required":true,"schema":{"type":"string"}},
+          {"name":"limit","in":"query","schema":{"type":"integer","default":3}}
+        ],
+        "responses": {"200":{"description":"Issue search results"}}
+      }
+    }
+  }
+}

@@ -2,6 +2,8 @@
 
 Run date: **2026-11-27**. Benchmark target: the current Go `skill-cli` alpha, a direct official-SDK native MCP peer, and a native progressive-discovery control. The reusable skill was generated, validated, and installed locally at `~/.codex/skills/skill-cli`; its distributable source is [skills/skill-cli](../skills/skill-cli/SKILL.md).
 
+This is a frozen baseline from commit `d523f55`, before the Skillhub design merge. Later CLI/skill changes do not retroactively change these token counts. Re-run the suite to measure a newer build.
+
 **The completed run measures retrieval and tokenized context components. No LLM-selection accuracy or billed model cost was measured:** the environment exposed no model API key, and the probed local model endpoints were unavailable. Those fields are explicitly `null` in [model-status.json](artifacts/model-status.json). The working [model runner](model_runner.py) is ready for a configured endpoint; fake-response unit tests are not presented as model results.
 
 ## Public services tested

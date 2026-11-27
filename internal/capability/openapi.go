@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/getkin/kin-openapi/openapi3"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
@@ -221,7 +222,7 @@ func (p *openAPIProvider) Discover(context.Context) ([]Capability, error) {
 func (p *openAPIProvider) Describe(_ context.Context, id string) (Capability, error) {
 	o, ok := p.ops[id]
 	if !ok {
-		return Capability{}, fmt.Errorf("unknown operation %q", id)
+		return Capability{}, NewFault("NOT_FOUND", fmt.Sprintf("unknown operation %q", id), "List the provider to discover exact operation IDs.", nil)
 	}
 	return Capability{ID: id, Description: o.op.Summary, Protocol: "openapi", InputSchema: schemaFor(o, p.definitions), Annotations: map[string]any{"method": o.method, "path": o.path}}, nil
 }
@@ -233,10 +234,19 @@ func scalar(v any) (string, error) {
 		return "", errors.New("only scalar path/query/header parameters are currently supported")
 	}
 }
-func (p *openAPIProvider) Invoke(ctx context.Context, id string, args map[string]any) (any, error) {
+func (p *openAPIProvider) Invoke(ctx context.Context, id string, args map[string]any) (result any, err error) {
+	defer func() {
+		if err != nil {
+			var fault *Fault
+			var network net.Error
+			if !errors.As(err, &fault) && !errors.As(err, &network) && !errors.Is(err, context.Canceled) && !errors.Is(err, context.DeadlineExceeded) {
+				err = NewFault("INVALID_ARGUMENT", err.Error(), "Describe the operation and correct its arguments.", err)
+			}
+		}
+	}()
 	o, ok := p.ops[id]
 	if !ok {
-		return nil, fmt.Errorf("unknown operation %q", id)
+		return nil, NewFault("NOT_FOUND", fmt.Sprintf("unknown operation %q", id), "List the provider to discover exact operation IDs.", nil)
 	}
 	if o.op.Servers != nil && len(*o.op.Servers) > 0 {
 		return nil, errors.New("operation-level servers are unsupported; configure a separate provider")
@@ -287,7 +297,7 @@ func (p *openAPIProvider) Invoke(ctx context.Context, id string, args map[string
 			return nil, fmt.Errorf("unknown argument %q; run describe", key)
 		}
 	}
-	var body map[string]any
+	var body json.RawMessage
 	if b := o.op.RequestBody; b != nil && b.Value != nil {
 		value, exists := args["body"]
 		if b.Value.Required && !exists {
@@ -303,10 +313,9 @@ func (p *openAPIProvider) Invoke(ctx context.Context, id string, args map[string
 					return nil, fmt.Errorf("invalid body: %w", err)
 				}
 			}
-			var ok bool
-			body, ok = value.(map[string]any)
-			if !ok {
-				return nil, errors.New("only JSON object request bodies are currently supported")
+			body, err = json.Marshal(value)
+			if err != nil {
+				return nil, err
 			}
 		}
 	} else if _, exists := args["body"]; exists {
@@ -315,5 +324,5 @@ func (p *openAPIProvider) Invoke(ctx context.Context, id string, args map[string
 	if len(query) > 0 {
 		path += "?" + query.Encode()
 	}
-	return requestWithHeaders(ctx, p.cfg, o.method, path, body, headers, p.limit)
+	return requestWithOptions(ctx, p.cfg, o.method, path, body, headers, nil, p.limit)
 }

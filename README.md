@@ -1,14 +1,16 @@
 # skill-cli
 
-A Go CLI for AI agents to discover, inspect, and invoke external capabilities without placing an entire tool catalog in model context.
+A Go CLI for AI agents and scripts to discover, inspect, and invoke MCP tools and HTTP APIs without placing an entire tool catalog in model context. The executable and project name are **`skill-cli`**.
 
-**Working alpha.** Supports MCP over stdio, Streamable HTTP and legacy SSE; OpenAPI 3.0 JSON/YAML; and direct HTTP requests. An optional authenticated loopback gateway retains MCP connections and resolves provider credentials outside the calling CLI.
+**Working alpha.** Supports MCP over stdio, Streamable HTTP and legacy SSE; OpenAPI 3.0 JSON/YAML; and direct HTTP requests with query parameters, headers, and JSON bodies. An optional authenticated loopback gateway retains MCP connections and resolves provider credentials outside the calling CLI. Discovery stays small; operation schemas are requested separately. [Skillhub comparison and merge decisions](docs/skillhub-merge.md).
 
 ## Try it locally
 
 Requires Go 1.25 or newer to build. The resulting executable needs no Go, Node, or Python runtime. A configured stdio server may require its own runtime.
 
 ```sh
+git clone https://github.com/wolvever/skill-cli.git
+cd skill-cli
 go build -o bin/skill-cli ./cmd/skill-cli
 go run ./examples/demo-server --listen 127.0.0.1:8080
 ```
@@ -19,6 +21,7 @@ In another terminal:
 bin/skill-cli --config examples/demo.json list
 bin/skill-cli --config examples/demo.json list demo
 bin/skill-cli --config examples/demo.json search add
+bin/skill-cli --config examples/demo.json search search --limit 5
 bin/skill-cli --config examples/demo.json describe demo.add
 bin/skill-cli --config examples/demo.json call demo.add --args '{"a":2,"b":3}'
 bin/skill-cli --config examples/demo.json call legacy.add --args '{"a":2,"b":3}'
@@ -35,16 +38,30 @@ cat args.json | skill-cli call demo.echo --args -
 
 In PowerShell, pipe with `Get-Content -Raw args.json`. No demo operation changes external state or needs credentials. `examples/skill-cli.json` shows real-service configuration patterns and requires adapting the local server path and credentials.
 
+For a complete PowerShell example, start the server above, then run in a second terminal:
+
+```powershell
+go build -o bin/skill-cli.exe ./cmd/skill-cli
+$cli = ".\bin\skill-cli.exe"
+$cfg = "examples/demo.json"
+& $cli --config $cfg search search --limit 5
+& $cli --config $cfg describe demo.search_issues
+'{"query":"login","limit":2}' | & $cli --config $cfg call demo.search_issues --args -
+'{"query":"login","limit":2}' | & $cli --config $cfg call issues.searchIssues --args -
+```
+
+The last two commands return the same issue-search data through MCP and OpenAPI. This fixture was adapted from the earlier Skillhub evaluation into a portable Go demo and regression tests.
+
 ## Agent interface
 
 | Command | Contract |
 | --- | --- |
 | `list` | Configured provider names and protocols; does not connect |
 | `list <provider>` | Operation IDs and descriptions, without schemas |
-| `search <text> [--provider name]` | Case-insensitive substring discovery |
+| `search <text> [--provider name] [--limit N]` | Case-insensitive substring discovery; sorted IDs, no schemas |
 | `describe <provider.operation>` | One input schema and available output schema/annotations |
 | `call <provider.operation> --args JSON\|@file\|-` | Invoke once with a JSON object |
-| `request <provider> <method> </path> [--args ...]` | HTTP request against a configured base URL |
+| `request <provider> <method> </path>` | HTTP request with optional `--query`, `--header`, `--body` |
 | `serve` | Persistent gateway for one trusted configuration and principal |
 
 Operational stdout is exactly one JSON envelope. Help/version are plain text. Both protocol errors and MCP `isError` results exit **1**, preserving tool-error data when available:
@@ -53,7 +70,15 @@ Operational stdout is exactly one JSON envelope. Help/version are plain text. Bo
 {"ok":true,"data":{"structuredContent":{"sum":5}}}
 ```
 
-The exact MCP result may also contain content blocks and protocol metadata. HTTP results contain `status`, `contentType`, and `body`. Errors use `{"ok":false,"error":"..."}`, optionally with `data`. MCP content is preserved rather than guessing whether a text block should be decoded as JSON.
+The exact MCP result may also contain content blocks and protocol metadata. HTTP results contain `status`, `contentType`, and `body`. Errors keep a readable `error` string and add stable `code` and recovery `hint` fields, optionally with upstream `data`:
+
+```json
+{"ok":false,"error":"HTTP 429","code":"RATE_LIMITED","hint":"Respect the provider's rate limit before making another request."}
+```
+
+Codes distinguish `INVALID_ARGUMENT`, `CONFIG_ERROR`, `NOT_FOUND`, `AUTH_FAILED`, `PERMISSION_DENIED`, `RATE_LIMITED`, `PROVIDER_UNAVAILABLE`, `TIMEOUT`, `CANCELLED`, `TOOL_ERROR`, and other `UPSTREAM_ERROR` failures. `RESPONSE_TOO_LARGE` asks for a smaller response or a larger explicit limit. Unknown MCP protocol errors remain upstream errors rather than being classified by guessing at their message text. Machine-readable failures stay on stdout so existing consumers can parse one envelope; incidental server diagnostics go to stderr. MCP content is preserved rather than guessing whether a text block should be decoded as JSON.
+
+Search is substring matching, not semantic ranking. `--limit 0` (the default) returns all matches; positive limits truncate the sorted result after discovery and do not reduce the upstream tools/list work. Use `--` before option-like positional values. Provider names allow letters, digits, underscores, and hyphens. Operation names are preserved literally after the first dot: `docs.search.issues-v2` addresses provider `docs`, operation `search.issues-v2`, without normalization or alias collisions.
 
 `--timeout 30s` covers connection setup and invocation. `--max-bytes 16777216` bounds CLI input/output, HTTP response bodies, spec files, gateway payloads, and individual MCP HTTP SSE events. It is **not** a pre-allocation memory limit for SDK-decoded MCP stdio results or a limit on the number of discovered schemas. A timeout can leave an unknown execution outcome. Calls and multi-round continuations are never automatically replayed.
 
@@ -76,6 +101,21 @@ Credentials are environment variable **names**, not values in configuration or c
 
 An optional nonempty `allow` list hides and denies every operation not listed, including gateway calls. Omitting it (or setting an empty list) permits all operations. Raw HTTP requests are disabled for providers with an operation allowlist so they cannot bypass it. Configure a provider URL explicitly when the API spec should not select the destination. Treat configs, specs, and stdio executables as trusted operator input.
 
+Configuration rejects unknown fields and extra JSON values, so a misspelled policy field cannot silently disappear. One-shot commands do not write home-directory discovery or usage caches.
+
+## HTTP requests
+
+Use a configured provider, a method, and a relative path. The local demo supports:
+
+```sh
+skill-cli --config examples/demo.json request rest GET /issues --query query=login --query limit=2
+skill-cli --config examples/demo.json request rest POST /echo --query tag=one --query tag=two --header X-Mode=safe --body @body.json
+```
+
+`--query key=value` can repeat, including the same key, and values are URL-encoded. Existing path queries are retained. `--header Name=value` supplies non-credential API options. Routing/framing headers and `Authorization`, `Proxy-Authorization`, and `Cookie` overrides are rejected; use environment bindings for secrets. There is no per-request arbitrary upstream override.
+
+`--body` accepts any single JSON value, `@file`, or `-` for stdin, including arrays, booleans, strings, and explicit `null`. Large integer literals are preserved. The earlier `--args` form remains supported for object bodies, but cannot be combined with `--body`. OpenAPI `call` still takes an argument object; its `body` member can be any JSON value permitted by that operation's schema.
+
 ## Persistent gateway
 
 Start one gateway per principal/security context. In the trusted host environment, set provider credentials and a random `SKILL_CLI_GATEWAY_TOKEN` of at least 24 characters, then:
@@ -97,7 +137,7 @@ The gateway binds only to loopback, validates Host, rejects browser Origins, lim
 
 ## OpenAPI support and current limits
 
-OpenAPI 3.0 JSON/YAML supports operation IDs (fallback: `get:/path`), path/query/header scalar parameters, JSON object bodies, request validation, internal references, and configured/environment authentication. `describe` bundles only transitively referenced schema components. Parameter location/name collisions and body-name collisions fail explicitly. Path/operation server overrides, cookie/array/object parameters, multipart, arbitrary scalar/array bodies, external references, Swagger 2, and OpenAPI 3.1+ are not implemented. Unsupported parameter forms fail before invocation when supplied. `securitySchemes` do not automatically authenticate; use explicit environment bindings.
+OpenAPI 3.0 JSON/YAML supports operation IDs (fallback: `get:/path`), path/query/header scalar parameters, JSON bodies validated against the schema, internal references, and configured/environment authentication. `describe` bundles only transitively referenced schema components. Parameter location/name collisions and body-name collisions fail explicitly. Path/operation server overrides, cookie/array/object parameters, multipart, external references, Swagger 2, and OpenAPI 3.1+ are not implemented. Unsupported parameter forms fail before invocation when supplied. `securitySchemes` do not automatically authenticate; use explicit environment bindings.
 
 GraphQL, gRPC, general JSON-RPC, semantic search, SDK/CLI generation, result storage, async tasks, prompts/resources/subscriptions, OAuth/keychain integration, cross-principal session pools, audit logging, rate limits, and approval policies remain roadmap items. Protocol-specific interfaces should own those lifecycle features rather than overloading synchronous invocation.
 

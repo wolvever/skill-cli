@@ -48,7 +48,7 @@ func (r *Runtime) provider(ctx context.Context, name string) (Provider, error) {
 	}
 	c, ok := r.config.Providers[name]
 	if !ok {
-		return nil, fmt.Errorf("unknown provider %q; run skill-cli list", name)
+		return nil, NewFault("NOT_FOUND", fmt.Sprintf("unknown provider %q; run skill-cli list", name), "Run skill-cli list to discover configured providers.", nil)
 	}
 	var p Provider
 	var err error
@@ -64,27 +64,40 @@ func (r *Runtime) provider(ctx context.Context, name string) (Provider, error) {
 	}
 	if err == nil {
 		r.providers[name] = p
+	} else if c.Type == "openapi" {
+		var fault *Fault
+		code, _ := ErrorDetails(err)
+		if !errors.As(err, &fault) && code == "UPSTREAM_ERROR" {
+			err = NewFault("CONFIG_ERROR", err.Error(), "Check the OpenAPI spec and its supported version and provider URL.", err)
+		}
 	}
 	return p, err
 }
 func splitID(id string) (string, string, error) {
 	a, b, ok := strings.Cut(id, ".")
 	if !ok || a == "" || b == "" {
-		return "", "", errors.New("expected provider.operation; run skill-cli list <provider>")
+		return "", "", InvalidArgument("expected provider.operation; run skill-cli list <provider>")
 	}
 	return a, b, nil
 }
 
 type Request struct {
-	Action string         `json:"action"`
-	Target string         `json:"target,omitempty"`
-	Query  string         `json:"query,omitempty"`
-	Args   map[string]any `json:"args,omitempty"`
-	Method string         `json:"method,omitempty"`
-	Path   string         `json:"path,omitempty"`
+	Action    string              `json:"action"`
+	Target    string              `json:"target,omitempty"`
+	Query     string              `json:"query,omitempty"`
+	Args      map[string]any      `json:"args,omitempty"`
+	Method    string              `json:"method,omitempty"`
+	Path      string              `json:"path,omitempty"`
+	Limit     int                 `json:"limit,omitempty"`
+	HTTPQuery map[string][]string `json:"httpQuery,omitempty"`
+	Headers   map[string]string   `json:"headers,omitempty"`
+	Body      json.RawMessage     `json:"body,omitempty"`
 }
 
 func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
+	if req.Limit < 0 {
+		return nil, InvalidArgument("limit must be nonnegative")
+	}
 	switch req.Action {
 	case "list", "search":
 		if req.Action == "list" && req.Target == "" {
@@ -131,6 +144,9 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 			}
 		}
 		sort.Slice(out, func(i, j int) bool { return out[i].ID < out[j].ID })
+		if req.Limit > 0 && len(out) > req.Limit {
+			out = out[:req.Limit]
+		}
 		return out, nil
 	case "describe", "call":
 		name, op, err := splitID(req.Target)
@@ -139,10 +155,10 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 		}
 		cfg, ok := r.config.Providers[name]
 		if !ok {
-			return nil, fmt.Errorf("unknown provider %q", name)
+			return nil, NewFault("NOT_FOUND", fmt.Sprintf("unknown provider %q", name), "Run skill-cli list to discover configured providers.", nil)
 		}
 		if !permitted(cfg, op) {
-			return nil, errors.New("operation denied by provider allowlist")
+			return nil, NewFault("PERMISSION_DENIED", "operation denied by provider allowlist", "Use an allowed operation or have the operator update the provider policy.", nil)
 		}
 		p, err := r.provider(ctx, name)
 		if err != nil {
@@ -168,21 +184,32 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 				return c, nil
 			}
 		}
-		return nil, fmt.Errorf("unknown operation %q", op)
+		return nil, NewFault("NOT_FOUND", fmt.Sprintf("unknown operation %q", op), "Run skill-cli list <provider> to discover exact operation IDs.", nil)
 	case "request":
 		cfg, ok := r.config.Providers[req.Target]
 		if !ok || !(cfg.Type == "http" || cfg.Type == "openapi") {
-			return nil, errors.New("request requires an http or openapi provider")
+			return nil, InvalidArgument("request requires an http or openapi provider")
 		}
 		if len(cfg.Allow) > 0 {
-			return nil, errors.New("raw requests disabled when provider has an operation allowlist")
+			return nil, NewFault("PERMISSION_DENIED", "raw requests disabled when provider has an operation allowlist", "Use call with an explicitly allowed operation.", nil)
 		}
 		if cfg.URL == "" {
 			return nil, errors.New("raw requests require an explicit provider url")
 		}
-		return rawRequest(ctx, cfg, req.Method, req.Path, req.Args, r.maxBytes)
+		if req.Body != nil && req.Args != nil {
+			return nil, InvalidArgument("request body and args cannot be combined")
+		}
+		body := req.Body
+		if req.Args != nil {
+			var err error
+			body, err = json.Marshal(req.Args)
+			if err != nil {
+				return nil, InvalidArgument("request args are not valid JSON")
+			}
+		}
+		return requestWithOptions(ctx, cfg, req.Method, req.Path, body, req.Headers, req.HTTPQuery, r.maxBytes)
 	default:
-		return nil, errors.New("unknown action")
+		return nil, InvalidArgument("unknown action")
 	}
 }
 
@@ -198,16 +225,19 @@ type Envelope struct {
 	OK    bool   `json:"ok"`
 	Data  any    `json:"data,omitempty"`
 	Error string `json:"error,omitempty"`
+	Code  string `json:"code,omitempty"`
+	Hint  string `json:"hint,omitempty"`
 }
 
 func Encode(data any, err error) []byte {
 	e := Envelope{OK: err == nil, Data: data}
 	if err != nil {
 		e.Error = err.Error()
+		e.Code, e.Hint = ErrorDetails(err)
 	}
 	b, encodeErr := json.Marshal(e)
 	if encodeErr != nil {
-		return []byte(`{"ok":false,"error":"result is not JSON serializable"}`)
+		return []byte(`{"ok":false,"error":"result is not JSON serializable","code":"INTERNAL_ERROR","hint":"Report the failing operation and response type."}`)
 	}
 	return b
 }
