@@ -3,17 +3,20 @@
     "deepwiki": {
       "type": "mcp",
       "transport": "http",
-      "url": "https://mcp.deepwiki.com/mcp"
+      "url": "https://mcp.deepwiki.com/mcp",
+      "description": "Repository wiki structure, full documentation and codebase questions for public GitHub projects."
     },
     "mslearn": {
       "type": "mcp",
       "transport": "http",
-      "url": "https://learn.microsoft.com/api/mcp"
+      "url": "https://learn.microsoft.com/api/mcp",
+      "description": "Official Microsoft Learn and Azure documentation, articles and code samples."
     },
     "cloudflare": {
       "type": "mcp",
       "transport": "http",
-      "url": "https://docs.mcp.cloudflare.com/mcp"
+      "url": "https://docs.mcp.cloudflare.com/mcp",
+      "description": "Official Cloudflare product documentation and Pages to Workers migration guidance."
     },
     "petstore": {
       "type": "openapi",
@@ -25,7 +28,8 @@
         "getInventory",
         "getOrderById",
         "getUserByName"
-      ]
+      ],
+      "description": "Swagger Petstore read-only pet, inventory, order and user lookups."
     },
     "apisguru": {
       "type": "openapi",
@@ -36,7 +40,50 @@
         "getProviders",
         "getProvider",
         "getServices"
-      ]
+      ],
+      "description": "APIs.guru OpenAPI directory metrics, providers and services."
+    },
+    "context7": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "description": "Resolve library identifiers and retrieve current library documentation and examples."
+    },
+    "grep": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.grep.app",
+      "description": "Search literal code patterns across public GitHub repositories with grep.app."
+    },
+    "svelte": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.svelte.dev/mcp",
+      "description": "Svelte and SvelteKit documentation, component diagnostics and Playground links."
+    },
+    "nuxt": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://nuxt.com/mcp",
+      "description": "Nuxt framework documentation, modules, releases, blog, deployment guides and contributors."
+    },
+    "astro": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.docs.astro.build/mcp",
+      "description": "Search official Astro framework documentation."
+    },
+    "huggingface": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://huggingface.co/mcp",
+      "description": "Hugging Face Hub repository discovery, metadata, files and authentication context."
+    },
+    "cloudflare_blog": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://blog.mcp.cloudflare.com/mcp",
+      "description": "Browse Cloudflare Blog posts, tags and full articles, and search topics."
     }
   }
 }

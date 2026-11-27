@@ -15,6 +15,41 @@
       "name": "Cloudflare Docs",
       "endpoint": "https://docs.mcp.cloudflare.com/mcp",
       "documentation": "https://github.com/cloudflare/mcp-server-cloudflare"
+    },
+    {
+      "name": "context7",
+      "endpoint": "https://mcp.context7.com/mcp",
+      "documentation": "https://github.com/upstash/context7"
+    },
+    {
+      "name": "grep",
+      "endpoint": "https://mcp.grep.app",
+      "documentation": "https://vercel.com/blog/grep-a-million-github-repositories-via-mcp"
+    },
+    {
+      "name": "svelte",
+      "endpoint": "https://mcp.svelte.dev/mcp",
+      "documentation": "https://svelte.dev/docs/mcp/remote-setup"
+    },
+    {
+      "name": "nuxt",
+      "endpoint": "https://nuxt.com/mcp",
+      "documentation": "https://nuxt.com/docs/4.x/guide/ai/mcp"
+    },
+    {
+      "name": "astro",
+      "endpoint": "https://mcp.docs.astro.build/mcp",
+      "documentation": "https://docs.astro.build/en/guides/build-with-ai/"
+    },
+    {
+      "name": "huggingface",
+      "endpoint": "https://huggingface.co/mcp",
+      "documentation": "https://huggingface.co/docs/hub/en/hf-mcp-server"
+    },
+    {
+      "name": "cloudflare_blog",
+      "endpoint": "https://blog.mcp.cloudflare.com/mcp",
+      "documentation": "https://github.com/cloudflare/mcp-server-cloudflare"
     }
   ],
   "openapi": [

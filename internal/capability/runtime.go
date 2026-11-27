@@ -89,6 +89,8 @@ type Request struct {
 	Method    string              `json:"method,omitempty"`
 	Path      string              `json:"path,omitempty"`
 	Limit     int                 `json:"limit,omitempty"`
+	Match     string              `json:"match,omitempty"`
+	Full      bool                `json:"full,omitempty"`
 	HTTPQuery map[string][]string `json:"httpQuery,omitempty"`
 	Headers   map[string]string   `json:"headers,omitempty"`
 	Body      json.RawMessage     `json:"body,omitempty"`
@@ -100,6 +102,9 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 	}
 	switch req.Action {
 	case "list", "search":
+		if req.Match != "" && req.Match != "ranked" && req.Match != "substring" {
+			return nil, InvalidArgument("match must be ranked or substring")
+		}
 		if req.Action == "list" && req.Target == "" {
 			names := []map[string]string{}
 			keys := []string{}
@@ -108,7 +113,22 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 			}
 			sort.Strings(keys)
 			for _, k := range keys {
-				names = append(names, map[string]string{"name": k, "type": r.config.Providers[k].Type})
+				cfg := r.config.Providers[k]
+				item := map[string]string{"name": k, "type": cfg.Type}
+				description := cfg.Description
+				if description == "" && len(cfg.SkillDescriptions) > 0 {
+					description = cfg.SkillDescriptions[0]
+				}
+				if description != "" {
+					if !req.Full {
+						description = compactDescription(description, 180)
+					}
+					item["description"] = description
+				}
+				names = append(names, item)
+			}
+			if req.Limit > 0 && len(names) > req.Limit {
+				names = names[:req.Limit]
 			}
 			return names, nil
 		}
@@ -136,16 +156,28 @@ func (r *Runtime) Execute(ctx context.Context, req Request) (any, error) {
 					continue
 				}
 				c.ID = name + "." + c.ID
-				c.InputSchema = nil
-				c.OutputSchema = nil
-				if req.Query == "" || strings.Contains(strings.ToLower(c.ID+" "+c.Description), strings.ToLower(req.Query)) {
-					out = append(out, c)
-				}
+				out = append(out, c)
 			}
 		}
 		sort.Slice(out, func(i, j int) bool { return out[i].ID < out[j].ID })
+		if req.Action == "search" {
+			if req.Match == "substring" {
+				matches := []Capability{}
+				for _, c := range out {
+					if strings.Contains(strings.ToLower(c.ID+" "+c.Description), strings.ToLower(req.Query)) {
+						matches = append(matches, c)
+					}
+				}
+				out = matches
+			} else {
+				out = NewSearchIndex(out, r.config.Providers).Search(req.Query)
+			}
+		}
 		if req.Limit > 0 && len(out) > req.Limit {
 			out = out[:req.Limit]
+		}
+		for i := range out {
+			out[i] = compactCapability(out[i], req.Full)
 		}
 		return out, nil
 	case "describe", "call":

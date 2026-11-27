@@ -18,7 +18,9 @@ skill-cli --config providers.json describe docs.search
 skill-cli --config providers.json call docs.search --args @args.json
 ```
 
-`list` without a provider only reads configuration. `list <provider>` and `search` return descriptions without schemas. Search is a **case-insensitive substring**, not semantic retrieval: a zero-result paraphrase is not proof that no matching capability exists. Try a short discriminating term, inspect likely providers, then `list <provider>` if needed. One unavailable provider can fail a global search; narrow it with `--provider` to isolate the service.
+`list` without a provider only reads configuration and shows provider descriptions. `search` ranks names, descriptions, argument names and configured skill metadata locally using BM25, returning at most 10 concise candidates by default. Use a natural request or discriminating terms, add `--provider` when known, and inspect the best candidates. Exact operation IDs take priority. Scores are lexical evidence, not semantic understanding or proof that an operation exists.
+
+`list <provider> --limit 10` is a bounded fallback for unclear results; use `--limit 0` to enumerate all. Search/list omit schemas and truncate descriptions; `--full` restores full descriptions and annotations. Read `describe` for complete instructions and schemas before deciding or invoking. A missing lexical match can need different words; an unrelated match must be rejected, especially on unsupported actions. One unavailable provider can fail a global search; narrow with `--provider`. `--match substring --limit 0 --full` preserves the old substring search behavior.
 
 For an unfamiliar operation, read `describe` before constructing its arguments. Use exact IDs returned by discovery; do not guess server tool names or API parameter names. Schemas are loaded on demand into agent context, although upstream MCP tools/list may transmit the full catalog to the client.
 

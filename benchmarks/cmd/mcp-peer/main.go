@@ -25,6 +25,8 @@ type request struct {
 	Provider string         `json:"provider"`
 	Tool     string         `json:"tool"`
 	Query    string         `json:"query"`
+	Match    string         `json:"match"`
+	Limit    int            `json:"limit"`
 	Args     map[string]any `json:"args"`
 }
 type driver struct {
@@ -85,7 +87,7 @@ func (d *driver) session(ctx context.Context, name string) (*mcp.ClientSession, 
 			return nil, errors.New("unsupported transport")
 		}
 	} else if cfg.Type == "openapi" {
-		data, err := d.runtime.Execute(ctx, capability.Request{Action: "list", Target: name})
+		data, err := d.runtime.Execute(ctx, capability.Request{Action: "list", Target: name, Full: true})
 		if err != nil {
 			return nil, err
 		}
@@ -152,7 +154,16 @@ func (d *driver) catalog(ctx context.Context, name string) ([]capability.Capabil
 	return out, nil
 }
 func (d *driver) run(ctx context.Context, r request) (any, error) {
+	if r.Limit < 0 {
+		return nil, errors.New("limit must be nonnegative")
+	}
 	switch r.Action {
+	case "metadata":
+		out := map[string]any{}
+		for name, cfg := range d.config.Providers {
+			out[name] = map[string]any{"description": cfg.Description, "keywords": cfg.Keywords, "skill_descriptions": cfg.SkillDescriptions}
+		}
+		return out, nil
 	case "catalog", "list", "search", "describe":
 		names := []string{}
 		if r.Provider != "" {
@@ -176,18 +187,26 @@ func (d *driver) run(ctx context.Context, r request) (any, error) {
 					}
 					continue
 				}
-				if r.Action == "search" && !strings.Contains(strings.ToLower(cap.ID+" "+cap.Description), strings.ToLower(r.Query)) {
+				if r.Action == "search" && r.Match != "ranked" && !strings.Contains(strings.ToLower(cap.ID+" "+cap.Description), strings.ToLower(r.Query)) {
 					continue
-				}
-				if r.Action == "list" || r.Action == "search" {
-					cap.InputSchema = nil
-					cap.OutputSchema = nil
 				}
 				out = append(out, cap)
 			}
 		}
 		if r.Action == "describe" {
 			return nil, errors.New("unknown tool")
+		}
+		if r.Action == "search" && r.Match == "ranked" {
+			out = capability.NewSearchIndex(out, d.config.Providers).Search(r.Query)
+		}
+		if r.Limit > 0 && len(out) > r.Limit {
+			out = out[:r.Limit]
+		}
+		if r.Action == "list" || r.Action == "search" {
+			for i := range out {
+				out[i].InputSchema = nil
+				out[i].OutputSchema = nil
+			}
 		}
 		return out, nil
 	case "call":

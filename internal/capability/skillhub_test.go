@@ -79,7 +79,7 @@ func TestSearchLimitAndLiteralOperationNames(t *testing.T) {
 	r := New(Config{Providers: map[string]ProviderConfig{"fixture": {Type: "http"}}}, 1000)
 	p := &catalogFixture{}
 	r.providers["fixture"] = p
-	data, err := r.Execute(context.Background(), Request{Action: "search", Query: "SEARCH", Limit: 2})
+	data, err := r.Execute(context.Background(), Request{Action: "search", Query: "SEARCH", Limit: 2, Match: "substring"})
 	if err != nil {
 		t.Fatal(err)
 	}

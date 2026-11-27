@@ -64,20 +64,28 @@ Calls are never automatically replayed. A timeout may have an unknown outcome.`
 		}
 		return nil
 	}
+	var listLimit int
+	var listFull bool
 	list := &cobra.Command{Use: "list [provider]", Short: "List providers, or concise operations without schemas", Args: cobra.MaximumNArgs(1), RunE: func(c *cobra.Command, a []string) error {
-		r := capability.Request{Action: "list"}
+		r := capability.Request{Action: "list", Limit: listLimit, Full: listFull}
 		if len(a) > 0 {
 			r.Target = a[0]
 		}
 		return execute(c, o, r)
 	}}
-	search := &cobra.Command{Use: "search <text>", Short: "Search operation names and descriptions (case-insensitive substring)", Args: cobra.ExactArgs(1)}
+	list.Flags().IntVar(&listLimit, "limit", 0, "Maximum entries sorted by ID (0 returns all)")
+	list.Flags().BoolVar(&listFull, "full", false, "Include complete descriptions and annotations, without schemas")
+	search := &cobra.Command{Use: "search <text>", Short: "Rank tools using names, descriptions, arguments and skill metadata", Args: cobra.ExactArgs(1)}
 	var provider string
 	var limit int
+	var match string
+	var full bool
 	search.Flags().StringVar(&provider, "provider", "", "Search only this provider")
-	search.Flags().IntVar(&limit, "limit", 0, "Maximum returned operations, sorted by ID (0 returns all)")
+	search.Flags().IntVar(&limit, "limit", 10, "Maximum returned operations (0 returns all)")
+	search.Flags().StringVar(&match, "match", "ranked", "ranked (local BM25) or substring (legacy ID order)")
+	search.Flags().BoolVar(&full, "full", false, "Include complete descriptions and annotations, without schemas")
 	search.RunE = func(c *cobra.Command, a []string) error {
-		return execute(c, o, capability.Request{Action: "search", Target: provider, Query: a[0], Limit: limit})
+		return execute(c, o, capability.Request{Action: "search", Target: provider, Query: a[0], Limit: limit, Match: match, Full: full})
 	}
 	describe := &cobra.Command{Use: "describe <provider.operation>", Short: "Load the input/output schema for one operation", Args: cobra.ExactArgs(1), RunE: func(c *cobra.Command, a []string) error {
 		return execute(c, o, capability.Request{Action: "describe", Target: a[0]})

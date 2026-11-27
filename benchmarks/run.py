@@ -20,6 +20,7 @@ from model_runner import ROUTER_TOOLS,SHELL_TOOLS,SYSTEM
 def capture(config,destination):
     cfg=json.loads(config.read_text(encoding='utf-8'));catalogs={};probes=[]
     with Peer(config) as peer:
+        metadata=peer.request(action='metadata')
         for name in sorted(cfg['providers']):
             start=time.perf_counter();native=peer.request(action='catalog',provider=name);other=cli(config,['list',name])
             row={'provider':name,'native_ok':native['ok'],'cli_ok':other['response']['ok'],'elapsed_ms':round(1000*(time.perf_counter()-start),2)}
@@ -28,6 +29,7 @@ def capture(config,destination):
             else:row['native_error']=native.get('error');row['cli_error']=other['response'].get('error')
             probes.append(row);print('capture',name,row,flush=True)
     snapshot={'captured_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'config_sha256':hashlib.sha256(config.read_bytes()).hexdigest(),'providers':cfg['providers'],'catalogs':catalogs,'probes':probes,'specs':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (BENCH/'specs').iterdir() if p.is_file()}}
+    if metadata.get('ok'):snapshot['search_metadata']=metadata['data']
     destination.write_text(json.dumps(snapshot,indent=2)+'\n',encoding='utf-8')
     if any(not r.get('catalog_ids_equal') for r in probes):raise RuntimeError('provider capture/parity failed; inspect the saved snapshot')
     return snapshot
@@ -50,7 +52,7 @@ def run(snapshot,destination):
             # relevance/coverage metrics, not predictions of what a model selects.
             rows.append(dict(task_id=task['id'],group=task['group'],arm='native_eager',selected=[c['id'] for c in all_caps],visible_component_tokens=native_boot+tokens(task['prompt']),**selection(by_id.keys(),task['gold_tools'])))
             query=task['query'];native=peer.request(action='search',query=query)
-            prescribed=cli(config,['search',query]);literal=cli(config,['search',task['prompt']])
+            prescribed=cli(config,['search',query,'--match','substring','--full','--limit','0']);literal=cli(config,['search',task['prompt'],'--match','substring','--full','--limit','0'])
             if not native['ok'] or not prescribed['response']['ok'] or not literal['response']['ok']:raise RuntimeError('local replay discovery failed')
             n_ids={c['id'] for c in native['data']};c_ids={c['id'] for c in prescribed['response']['data']}
             if n_ids!=c_ids:raise RuntimeError('native/CLI search parity mismatch: '+task['id'])
@@ -64,7 +66,7 @@ def run(snapshot,destination):
             if not fallback['data']:
                 fallback={'ok':True,'data':[]}
                 for provider in snapshot['catalogs']:
-                    listed=cli(config,['list',provider])['response'];fallback['data'].extend(listed['data']);extra+=tokens(listed)
+                    listed=cli(config,['list',provider,'--full'])['response'];fallback['data'].extend(listed['data']);extra+=tokens(listed)
             ids=[c['id'] for c in fallback['data']]
             rows.append(dict(task_id=task['id'],group=task['group'],arm='cli_literal_list_fallback',selected=ids,visible_component_tokens=cli_boot+tokens(task['prompt'])+tokens(literal['response'])+tokens({'action':'search','query':task['prompt']})+extra,**selection(ids,task['gold_tools'])))
     summary={}

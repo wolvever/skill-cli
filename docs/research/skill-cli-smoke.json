@@ -2,7 +2,7 @@
   {
     "case": "list",
     "exit_code": 0,
-    "elapsed_ms": 213.6,
+    "elapsed_ms": 156.25,
     "output": {
       "ok": true,
       "data": [
@@ -36,33 +36,29 @@
   {
     "case": "discover",
     "exit_code": 0,
-    "elapsed_ms": 115.86,
+    "elapsed_ms": 166.25,
     "output": {
       "ok": true,
       "data": [
         {
           "id": "demo.add",
           "description": "Add two numbers",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         },
         {
           "id": "demo.echo",
           "description": "Echo a message and optional nested JSON",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         },
         {
           "id": "demo.fail",
           "description": "Return a tool execution error",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         },
         {
           "id": "demo.search_issues",
           "description": "Search demo issues by query",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         }
       ]
     }
@@ -70,15 +66,14 @@
   {
     "case": "search",
     "exit_code": 0,
-    "elapsed_ms": 106.31,
+    "elapsed_ms": 153.32,
     "output": {
       "ok": true,
       "data": [
         {
           "id": "demo.add",
           "description": "Add two numbers",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         }
       ]
     }
@@ -86,21 +81,19 @@
   {
     "case": "bounded_search",
     "exit_code": 0,
-    "elapsed_ms": 109.21,
+    "elapsed_ms": 157.5,
     "output": {
       "ok": true,
       "data": [
         {
           "id": "demo.add",
           "description": "Add two numbers",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         },
         {
           "id": "demo.echo",
           "description": "Echo a message and optional nested JSON",
-          "protocol": "mcp",
-          "annotations": null
+          "protocol": "mcp"
         }
       ]
     }
@@ -108,7 +101,7 @@
   {
     "case": "describe",
     "exit_code": 0,
-    "elapsed_ms": 93.37,
+    "elapsed_ms": 153.2,
     "output": {
       "ok": true,
       "data": {
@@ -138,7 +131,7 @@
   {
     "case": "demo_call",
     "exit_code": 0,
-    "elapsed_ms": 80.15,
+    "elapsed_ms": 175.61,
     "output": {
       "ok": true,
       "data": {
@@ -157,7 +150,7 @@
   {
     "case": "legacy_call",
     "exit_code": 0,
-    "elapsed_ms": 85.47,
+    "elapsed_ms": 165.52,
     "output": {
       "ok": true,
       "data": {
@@ -176,7 +169,7 @@
   {
     "case": "stdio_call",
     "exit_code": 0,
-    "elapsed_ms": 114.92,
+    "elapsed_ms": 189.69,
     "output": {
       "ok": true,
       "data": {
@@ -202,7 +195,7 @@
   {
     "case": "nested_stdin",
     "exit_code": 0,
-    "elapsed_ms": 77.79,
+    "elapsed_ms": 163.5,
     "output": {
       "ok": true,
       "data": {
@@ -228,7 +221,7 @@
   {
     "case": "tool_error",
     "exit_code": 1,
-    "elapsed_ms": 97.15,
+    "elapsed_ms": 158.14,
     "output": {
       "ok": false,
       "data": {
@@ -248,7 +241,7 @@
   {
     "case": "invalid_input",
     "exit_code": 1,
-    "elapsed_ms": 84.41,
+    "elapsed_ms": 163.4,
     "output": {
       "ok": false,
       "data": {
@@ -268,7 +261,7 @@
   {
     "case": "openapi_call",
     "exit_code": 0,
-    "elapsed_ms": 101.9,
+    "elapsed_ms": 172.03,
     "output": {
       "ok": true,
       "data": {
@@ -285,7 +278,7 @@
   {
     "case": "raw_http",
     "exit_code": 0,
-    "elapsed_ms": 91.51,
+    "elapsed_ms": 148.53,
     "output": {
       "ok": true,
       "data": {
@@ -302,7 +295,7 @@
   {
     "case": "issue_search_mcp",
     "exit_code": 0,
-    "elapsed_ms": 95.08,
+    "elapsed_ms": 150.53,
     "output": {
       "ok": true,
       "data": {
@@ -328,7 +321,7 @@
   {
     "case": "issue_search_openapi",
     "exit_code": 0,
-    "elapsed_ms": 116.1,
+    "elapsed_ms": 162.18,
     "output": {
       "ok": true,
       "data": {
@@ -350,7 +343,7 @@
   {
     "case": "http_query_header_array",
     "exit_code": 0,
-    "elapsed_ms": 87.7,
+    "elapsed_ms": 143.12,
     "output": {
       "ok": true,
       "data": {
@@ -376,7 +369,7 @@
   {
     "case": "http_null",
     "exit_code": 0,
-    "elapsed_ms": 84.89,
+    "elapsed_ms": 138.21,
     "output": {
       "ok": true,
       "data": {
@@ -393,7 +386,7 @@
   {
     "case": "http_credential_override",
     "exit_code": 1,
-    "elapsed_ms": 86.98,
+    "elapsed_ms": 126.9,
     "output": {
       "ok": false,
       "error": "credential headers must use provider environment bindings",
@@ -404,7 +397,7 @@
   {
     "case": "unknown_provider",
     "exit_code": 1,
-    "elapsed_ms": 72.32,
+    "elapsed_ms": 133.56,
     "output": {
       "ok": false,
       "error": "unknown provider \"missing\"; run skill-cli list",
@@ -415,7 +408,7 @@
   {
     "case": "thin_gateway_list",
     "exit_code": 0,
-    "elapsed_ms": 72.5,
+    "elapsed_ms": 139.26,
     "output": {
       "ok": true,
       "data": [
@@ -449,7 +442,7 @@
   {
     "case": "gateway_call_0",
     "exit_code": 0,
-    "elapsed_ms": 91.46,
+    "elapsed_ms": 152.54,
     "output": {
       "ok": true,
       "data": {
@@ -468,7 +461,7 @@
   {
     "case": "gateway_call_1",
     "exit_code": 0,
-    "elapsed_ms": 80.99,
+    "elapsed_ms": 141.17,
     "output": {
       "ok": true,
       "data": {
@@ -487,7 +480,7 @@
   {
     "case": "gateway_call_2",
     "exit_code": 0,
-    "elapsed_ms": 87.6,
+    "elapsed_ms": 134.61,
     "output": {
       "ok": true,
       "data": {
@@ -506,7 +499,7 @@
   {
     "case": "gateway_allowlist",
     "exit_code": 1,
-    "elapsed_ms": 101.98,
+    "elapsed_ms": 135.94,
     "output": {
       "ok": false,
       "error": "gateway: operation denied by provider allowlist",
@@ -517,7 +510,7 @@
   {
     "case": "gateway_http_options",
     "exit_code": 0,
-    "elapsed_ms": 103.98,
+    "elapsed_ms": 138.53,
     "output": {
       "ok": true,
       "data": {
@@ -543,18 +536,16 @@
   {
     "case": "gateway_search_limit",
     "exit_code": 0,
-    "elapsed_ms": 115.58,
+    "elapsed_ms": 140.74,
     "output": {
       "ok": true,
       "data": [
         {
-          "annotations": null,
           "description": "Add two numbers",
           "id": "demo.add",
           "protocol": "mcp"
         },
         {
-          "annotations": null,
           "description": "Echo a message and optional nested JSON",
           "id": "demo.echo",
           "protocol": "mcp"

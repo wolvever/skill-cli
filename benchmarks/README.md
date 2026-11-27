@@ -6,7 +6,9 @@ This suite compares capability discovery and selection with the same tool catalo
 2. Does the **same model** select the right capabilities (model precision/recall)?
 3. How many tokens are visible or billed, including instructions and discovery overhead?
 
-The checked-in [results](RESULTS.md) report measurements already run and identify the model measurements that could not run without credentials. A transport smoke test is not scored as model accuracy.
+The current [ten-server results](RESULTS-10.md) cover **10 MCP servers, two OpenAPI sources, 46 operations and 80 tasks**, with local BM25 ranking, a metadata ablation, compact listings and an SDK/CLI parity control. The [three-server results](RESULTS.md) remain a historical baseline. A transport smoke test is not scored as model accuracy.
+
+Run `python benchmarks/ranked.py` against the checked-in `artifacts/catalog-10.json`; add `--capture` to refresh public metadata. This is the current expanded benchmark. The original `run.py`, `tasks.py` and older artifacts retain the 40-task substring experiment. That script passes explicit legacy matching flags to the current CLI; its original measurements are pinned to the commit named in RESULTS.md.
 
 ## Public services and provenance
 
@@ -15,6 +17,13 @@ The checked-in [results](RESULTS.md) report measurements already run and identif
 | DeepWiki | [Vendor docs](https://docs.devin.ai/work-with-devin/deepwiki-mcp), `https://mcp.deepwiki.com/mcp` | 3 public repository documentation tools |
 | Microsoft Learn | [Vendor docs](https://learn.microsoft.com/en-us/training/support/mcp), `https://learn.microsoft.com/api/mcp` | 3 documentation/code retrieval tools |
 | Cloudflare Docs | [Vendor repository](https://github.com/cloudflare/mcp-server-cloudflare), `https://docs.mcp.cloudflare.com/mcp` | 2 documentation tools |
+| Context7 | [Vendor repository](https://github.com/upstash/context7), `https://mcp.context7.com/mcp` | 2 library resolution/documentation tools |
+| grep.app | [Vendor introduction](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp), `https://mcp.grep.app` | 1 public code search tool |
+| Svelte | [Official setup](https://svelte.dev/docs/ai/remote-setup), `https://mcp.svelte.dev/mcp` | 4 documentation, diagnostics and Playground tools |
+| Nuxt | [Official setup](https://nuxt.com/docs/4.x/guide/ai/mcp), `https://nuxt.com/mcp` | 13 docs, modules, release, blog, hosting and contributor tools |
+| Astro | [Official setup](https://docs.astro.build/en/guides/build-with-ai/), `https://mcp.docs.astro.build/mcp` | 1 documentation search tool |
+| Hugging Face | [Official setup](https://huggingface.co/docs/hub/en/hf-mcp-server), `https://huggingface.co/mcp` | 4 repository/identity tools |
+| Cloudflare Blog | [Vendor repository](https://github.com/cloudflare/mcp-server-cloudflare), `https://blog.mcp.cloudflare.com/mcp` | 4 article/tag tools |
 | Swagger Petstore | [Publisher UI/spec](https://petstore3.swagger.io/) | 5 allowlisted read-only OpenAPI 3.0 operations |
 | APIs.guru | [Publisher spec](https://api.apis.guru/v2/openapi.yaml) | 4 allowlisted read-only OpenAPI 3.0 operations |
 | Open-Meteo | [Publisher elevation spec](https://github.com/open-meteo/open-meteo/blob/main/openapi/elevation.yml) | Compatibility-only exclusion: OpenAPI 3.1 is unsupported by this alpha |
@@ -89,6 +98,8 @@ All three arms use the same model, prompts, frozen catalog, output limit, and tu
 - **Skill CLI:** provide the full generated skill and one restricted argv-based shell tool that actually executes `skill-cli list/search/describe`. Config overrides, arbitrary shell commands, and operation invocation are blocked. This does not test arbitrary shell composition or code-mode filtering.
 
 The runner grades final `selected_tools` against gold IDs, reporting micro/macro precision/recall, exact set match, negative abstention, and valid-output rate. Invalid JSON and turn-limit failures count as failures, including on negative tasks. All attempted model turns and tool observations are retained. It records provider-reported input, cached input, output, and reasoning token usage; it does not substitute tokenizer estimates if usage is missing. Account-invoiced charges can still differ due to provider pricing/tiering. Failed API requests may have unknown billed usage and must not support a complete-cost claim.
+
+For the expanded corpus use `--snapshot benchmarks/artifacts/catalog-10.json --task-limit 80`; the runner selects the 80-task corpus for that snapshot. Current native progressive and CLI search both use local ranked retrieval with a limit of 10; native progressive retains full descriptions while the CLI defaults to compact output. This is an integration comparison, not an output-identical transport benchmark. The no-key ranked benchmark asserts ordered-ID parity and uses an identical compact projection for native token comparisons. It also reports metadata ablation and unsupported-action candidates. No expanded model-inference results are checked in.
 
 For dollar accounting, supply verified rates for the selected model/tier:
 

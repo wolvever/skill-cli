@@ -56,9 +56,9 @@ The last two commands return the same issue-search data through MCP and OpenAPI.
 
 | Command | Contract |
 | --- | --- |
-| `list` | Configured provider names and protocols; does not connect |
-| `list <provider>` | Operation IDs and descriptions, without schemas |
-| `search <text> [--provider name] [--limit N]` | Case-insensitive substring discovery; sorted IDs, no schemas |
+| `list` | Provider names, protocols and configured descriptions; does not connect |
+| `list <provider> [--limit N] [--full]` | Operation IDs and short descriptions, without schemas |
+| `search <text> [--provider name] [--limit N]` | Local BM25 ranking; top 10 short candidates, no schemas |
 | `describe <provider.operation>` | One input schema and available output schema/annotations |
 | `call <provider.operation> --args JSON\|@file\|-` | Invoke once with a JSON object |
 | `request <provider> <method> </path>` | HTTP request with optional `--query`, `--header`, `--body` |
@@ -78,7 +78,9 @@ The exact MCP result may also contain content blocks and protocol metadata. HTTP
 
 Codes distinguish `INVALID_ARGUMENT`, `CONFIG_ERROR`, `NOT_FOUND`, `AUTH_FAILED`, `PERMISSION_DENIED`, `RATE_LIMITED`, `PROVIDER_UNAVAILABLE`, `TIMEOUT`, `CANCELLED`, `TOOL_ERROR`, and other `UPSTREAM_ERROR` failures. `RESPONSE_TOO_LARGE` asks for a smaller response or a larger explicit limit. Unknown MCP protocol errors remain upstream errors rather than being classified by guessing at their message text. Machine-readable failures stay on stdout so existing consumers can parse one envelope; incidental server diagnostics go to stderr. MCP content is preserved rather than guessing whether a text block should be decoded as JSON.
 
-Search is substring matching, not semantic ranking. `--limit 0` (the default) returns all matches; positive limits truncate the sorted result after discovery and do not reduce the upstream tools/list work. Use `--` before option-like positional values. Provider names allow letters, digits, underscores, and hyphens. Operation names are preserved literally after the first dot: `docs.search.issues-v2` addresses provider `docs`, operation `search.issues-v2`, without normalization or alias collisions.
+Search ranks operation names, descriptions, argument names and configured provider/skill metadata using local BM25, with identifier splitting and a typo fallback when no lexical terms match. It needs no model download, API key, database or service. Exact IDs take priority; semantic reasoning and reliable negation handling still require the agent. Search returns at most 10 candidates by default; `--limit 0` returns all matches. List/search descriptions are bounded to 180 runes; `--full` restores complete descriptions and annotations, while `describe` returns the complete available schema and instructions. Limits reduce output, not upstream tools/list work. Legacy matching remains available with `--match substring --limit 0 --full`. Read the [retrieval design and alternatives](docs/research/lightweight-retrieval.md).
+
+Use `--` before option-like positional values. Provider names allow letters, digits, underscores, and hyphens. Operation names are preserved literally after the first dot: `docs.search.issues-v2` addresses provider `docs`, operation `search.issues-v2`, without normalization or alias collisions.
 
 `--timeout 30s` covers connection setup and invocation. `--max-bytes 16777216` bounds CLI input/output, HTTP response bodies, spec files, gateway payloads, and individual MCP HTTP SSE events. It is **not** a pre-allocation memory limit for SDK-decoded MCP stdio results or a limit on the number of discovered schemas. A timeout can leave an unknown execution outcome. Calls and multi-round continuations are never automatically replayed.
 
@@ -102,6 +104,19 @@ Credentials are environment variable **names**, not values in configuration or c
 An optional nonempty `allow` list hides and denies every operation not listed, including gateway calls. Omitting it (or setting an empty list) permits all operations. Raw HTTP requests are disabled for providers with an operation allowlist so they cannot bypass it. Configure a provider URL explicitly when the API spec should not select the destination. Treat configs, specs, and stdio executables as trusted operator input.
 
 Configuration rejects unknown fields and extra JSON values, so a misspelled policy field cannot silently disappear. One-shot commands do not write home-directory discovery or usage caches.
+
+Providers may add `description`, `keywords`, `skill_descriptions` and `skill_files` for discovery. Skill paths resolve relative to the config and accept a SKILL.md file or folder. Only the explicitly configured frontmatter `name` and `description` are indexed, bounded to 64 KiB; skill bodies/scripts are not indexed or executed. Provider summaries appear in `list` without opening server connections. Keep broad metadata concise because it applies to every allowed tool from that provider.
+
+Try the public catalog (10 MCP servers and two OpenAPI sources):
+
+```sh
+skill-cli --config benchmarks/public.json list
+skill-cli --config benchmarks/public.json search "Svelte component fixes" --provider svelte --limit 3
+skill-cli --config benchmarks/public.json list nuxt --limit 5
+skill-cli --config benchmarks/public.json describe svelte.svelte-autofixer
+```
+
+These discovery commands contact public servers when listing tools or searching. Public availability and anonymous quotas can change. Narrow searches by provider to reduce network work and isolate failures.
 
 ## HTTP requests
 
@@ -158,4 +173,4 @@ The [hands-on evaluation](docs/research/evaluation.md) explains the ranking and 
 
 The reusable [skill-cli skill](skills/skill-cli/SKILL.md) teaches progressive discovery, schema inspection, portable JSON input, failure handling, and gateway use. Install the `skills/skill-cli` folder into your agent's skills directory; for Codex the usual destination is `~/.codex/skills/skill-cli`.
 
-The [benchmark suite](benchmarks/README.md) includes public MCP/OpenAPI sources, a 40-task labeled corpus, an official-SDK native MCP peer, frozen catalog replay, retrieval metrics, token-component counts, live read-only probes, and a three-arm model-selection runner with provider-reported token usage. Read the [measured results and limitations](benchmarks/RESULTS.md) before interpreting savings or precision/recall. Model accuracy and billed cost require a configured model endpoint; tokenizer counts are not billing measurements.
+The [benchmark suite](benchmarks/README.md) now includes **10 public MCP servers, two OpenAPI sources, 46 operations and 80 labeled tasks**, an official-SDK native MCP peer, frozen catalog replay, retrieval metrics, token-component counts, live read-only probes, and a three-arm model-selection runner with provider-reported token usage. Read the [expanded results](benchmarks/RESULTS-10.md) and the [historical three-server baseline](benchmarks/RESULTS.md) before interpreting savings or precision/recall. Model accuracy and billed cost require a configured model endpoint; tokenizer counts are not billing measurements.

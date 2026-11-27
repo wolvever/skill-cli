@@ -56,6 +56,23 @@ class ReplayAndRunnerTest(unittest.TestCase):
             self.assertTrue(native['ok']);self.assertEqual(native['data'][0]['inputSchema'],other['data']['inputSchema'])
             self.assertEqual(cli(cfg,['search','ECHO'])['response']['data'][0]['id'],'fixture.echo')
             denied=cli(cfg,['call','fixture.echo','--args','-'],stdin='{"message":"hi"}');self.assertNotEqual(denied['exit_code'],0)
+    def test_ranked_metadata_and_schema_argument_parity(self):
+        snapshot=copy.deepcopy(self.snapshot)
+        snapshot['search_metadata']={'fixture':{'description':'Astronomy reference','skill_descriptions':['observations: Study distant galaxies']}}
+        with tempfile.TemporaryDirectory() as tmp,replay(snapshot,tmp) as cfg,Peer(cfg) as peer:
+            for query in ['galaxies','astronomy','message','Echo a message']:
+                native=peer.request(action='search',query=query,match='ranked',limit=3)
+                other=cli(cfg,['search',query,'--limit','3'])['response']
+                self.assertTrue(native['ok']);self.assertTrue(other['ok']);self.assertEqual([c['id'] for c in native['data']],[c['id'] for c in other['data']]);self.assertEqual(len(other['data']),1)
+            self.assertIn('Astronomy',cli(cfg,['list'])['response']['data'][0]['description'])
+    def test_expanded_corpus_and_public_server_count(self):
+        from tasks_10 import TASKS
+        cfg=json.loads((BENCH/'public.json').read_text(encoding='utf-8'))
+        self.assertEqual(sum(p['type']=='mcp' for p in cfg['providers'].values()),10)
+        snapshot=json.loads((BENCH/'artifacts/catalog-10.json').read_text(encoding='utf-8'))
+        ids={c['id'] for caps in snapshot['catalogs'].values() for c in caps}
+        self.assertEqual(len(ids),46);self.assertEqual(len(TASKS),80);self.assertEqual(len({t['id'] for t in TASKS}),80)
+        for task in TASKS:self.assertFalse(set(task['gold_tools'])-ids)
     def test_cli_tool_cannot_change_config_or_invoke(self):
         for argv in [['skill-cli','call','fixture.echo'],['skill-cli','search','a','--config=bad'],['python','-c','code']]:
             with self.assertRaises(ValueError):cli_dispatch('unused',{'argv':argv})

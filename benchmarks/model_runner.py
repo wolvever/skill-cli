@@ -24,7 +24,7 @@ the available catalog. For an unavailable operation return an empty selection.
 Finish with one JSON object: {"selected_tools":["provider.operation",...]}.'''
 
 ROUTER_TOOLS=[
- {'type':'function','function':{'name':'discover','description':'Discover MCP tools by case-insensitive substring; empty query lists tools. An empty provider searches every provider.','parameters':{'type':'object','properties':{'query':{'type':'string'},'provider':{'type':'string'}},'required':['query']}}},
+ {'type':'function','function':{'name':'discover','description':'Discover MCP tools using local lexical BM25 ranking of names, descriptions, argument names and provider metadata. Returns up to 10 candidates; empty query lists tools. An empty provider searches every provider. Inspect complete instructions with describe.','parameters':{'type':'object','properties':{'query':{'type':'string'},'provider':{'type':'string'}},'required':['query']}}},
  {'type':'function','function':{'name':'describe','description':'Get the complete schema of one exact provider.tool ID.','parameters':{'type':'object','properties':{'tool':{'type':'string'}},'required':['tool']}}},
 ]
 SHELL_TOOLS=[{'type':'function','function':{'name':'shell','description':'Run skill-cli with an argv array, starting with skill-cli. Config is supplied by the harness. Selection-only commands: list, search, describe, --help. No shell expansion or pipes. Example argv: ["skill-cli","search","search"].','parameters':{'type':'object','properties':{'argv':{'type':'array','items':{'type':'string'}}},'required':['argv']}}}]
@@ -65,14 +65,14 @@ def cli_dispatch(config,args):
     if not isinstance(argv,list) or not argv or any(not isinstance(v,str) for v in argv) or argv[0]!='skill-cli':raise ValueError('argv must start with skill-cli')
     if len(argv)<2 or argv[1] not in ['list','search','describe','--help']:raise ValueError('selection benchmark permits list/search/describe only')
     if any(v in ['--config','--gateway','--gateway-token-env','--timeout','--max-bytes'] or v.startswith(('--config=','--gateway=','--timeout=','--max-bytes=','--gateway-token-env=')) for v in argv):raise ValueError('provider configuration overrides are not permitted')
-    if argv[1]=='--help':return {'commands':['list [provider]','search <substring> [--provider name]','describe <provider.operation>']}
+    if argv[1]=='--help':return {'commands':['list [provider] [--limit N] [--full]','search <text> [--provider name] [--limit N] [--match ranked|substring] [--full]','describe <provider.operation>']}
     return cli(config,argv[1:])['response']
 
 def dispatch(peer,config,name,args):
     if name=='shell':return cli_dispatch(config,args)
     if name=='discover':
         if not isinstance(args.get('query'),str):raise ValueError('query must be a string')
-        return peer.request(action='search',query=args['query'],provider=args.get('provider',''))
+        return peer.request(action='search',query=args['query'],provider=args.get('provider',''),match='ranked',limit=10)
     if name=='describe':return peer.request(action='describe',tool=args['tool'])
     raise ValueError('operation invocation disabled in selection benchmark')
 
@@ -149,7 +149,9 @@ def main():
     if a.task_limit<1 or a.repeats<1 or a.max_turns<1 or a.max_output_tokens<1:p.error('limits must be positive')
     snapshot=json.loads(a.snapshot.read_text(encoding='utf-8'));catalog=[c for caps in snapshot['catalogs'].values() for c in caps]
     api=API(a.base_url,key,a.model,a.max_output_tokens,rates if rates[0] is not None else None,a.budget_usd)
-    rng=random.Random(a.seed);tasks=list(TASKS);rng.shuffle(tasks);tasks=tasks[:a.task_limit];rows=[];stopped=None
+    from tasks_10 import TASKS as EXPANDED
+    corpus=EXPANDED if len(snapshot['catalogs'])>=12 else TASKS
+    rng=random.Random(a.seed);tasks=list(corpus);rng.shuffle(tasks);tasks=tasks[:a.task_limit];rows=[];stopped=None
     schedule=[]
     for repeat in range(a.repeats):
         for task in tasks:

@@ -76,6 +76,8 @@ def replay(snapshot,directory):
             self.reply(200,out)
     server=ThreadingHTTPServer(('127.0.0.1',0),Handler);server.daemon_threads=True
     thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
-    config=pathlib.Path(directory)/'replay.json';config.write_text(json.dumps({'providers':{name:{'type':'mcp','transport':'http','url':'http://127.0.0.1:'+str(server.server_port)+'/'+name} for name in catalogs}},indent=2),encoding='utf-8')
+    metadata=snapshot.get('search_metadata',snapshot.get('providers',{}))
+    providers={name:dict(type='mcp',transport='http',url='http://127.0.0.1:'+str(server.server_port)+'/'+name,**{key:metadata.get(name,{}).get(key) for key in ['description','keywords','skill_descriptions'] if metadata.get(name,{}).get(key)}) for name in catalogs}
+    config=pathlib.Path(directory)/'replay.json';config.write_text(json.dumps({'providers':providers},indent=2),encoding='utf-8')
     try:yield config
     finally:server.shutdown();server.server_close();thread.join(timeout=2)
