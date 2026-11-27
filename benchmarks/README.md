@@ -99,7 +99,7 @@ python benchmarks/model_runner.py --model YOUR_MODEL --task-limit 12 \
   --output-usd-per-million OUTPUT_RATE --budget-usd 5
 ```
 
-Replace the rate placeholders with numbers. Cost is `(uncached_input × input_rate + cached_input × cache_rate + output × output_rate) / 1,000,000`. The admission check reserves a conservative upper estimate before each request; it is not an account-level hard spending limit. Partial episodes retain known usage when the budget stops a run. No model request is automatically retried. A failed endpoint response or missing usage is recorded as an error, not silently excluded. When rates are omitted, dollar fields stay `null`.
+Replace the rate placeholders with numbers. Cost is `(uncached_input × input_rate + cached_input × cache_rate + output × output_rate) / 1,000,000`. The admission check reserves a conservative upper estimate before each request; it is not an account-level hard spending limit. Partial episodes retain known usage when the budget stops a run. Budget-stopped episodes are reported as incomplete coverage rather than scored as model mistakes. No model request is automatically retried. A failed endpoint response or missing usage is recorded as an error, not silently excluded; unknown usage stops further requests so it cannot be presented as a complete-cost comparison. When rates are omitted, dollar fields stay `null`.
 
 Matched task/repeat pairs enter comparisons; repeats are averaged per task before a paired bootstrap 95% interval. Report completed/planned episodes so budget exhaustion cannot hide missing comparisons. Start with a pilot; the full design is 40 tasks × 3 arms × 3 repeats = **360 episodes**, potentially several model requests per episode.
 

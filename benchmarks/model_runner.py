@@ -53,12 +53,12 @@ class API:
         self.calls+=1
         usage=obj.get('usage')
         if not usage or 'prompt_tokens' not in usage or 'completion_tokens' not in usage:self.unknown_usage_requests+=1;raise RuntimeError('endpoint did not return token usage; no billed-token result can be recorded')
-        cached=usage.get('prompt_tokens_details',{}).get('cached_tokens',0);inp=usage['prompt_tokens'];out=usage['completion_tokens']
-        if not (0<=cached<=inp):raise RuntimeError('inconsistent cached token usage')
+        cached=(usage.get('prompt_tokens_details') or {}).get('cached_tokens',0);inp=usage['prompt_tokens'];out=usage['completion_tokens']
+        if not (0<=cached<=inp):self.unknown_usage_requests+=1;raise RuntimeError('inconsistent cached token usage')
         cost=None
         if self.rates:
             cost=((inp-cached)*self.rates[0]+cached*self.rates[1]+out*self.rates[2])/1e6;self.spent+=cost
-        return obj,dict(input_tokens=inp,cached_input_tokens=cached,output_tokens=out,reasoning_tokens=usage.get('completion_tokens_details',{}).get('reasoning_tokens',0),usd=cost)
+        return obj,dict(input_tokens=inp,cached_input_tokens=cached,output_tokens=out,reasoning_tokens=(usage.get('completion_tokens_details') or {}).get('reasoning_tokens',0),usd=cost)
 
 def cli_dispatch(config,args):
     argv=args.get('argv')
@@ -162,6 +162,7 @@ def main():
             row=episode(api,arm,task,catalog,peer,config,a.max_turns)
             row['repeat']=repeat;rows.append(row);save();print(task['id'],arm,row['exact_match'],row['usage'],flush=True)
             if row['error'] and row['error'].startswith('BudgetExceeded:'):stopped=row['error'];save();break
+            if not row['usage_complete']:stopped='model request has unknown token usage; stopped to avoid an incomplete-cost comparison';save();break
     save()
 
 if __name__=='__main__':main()

@@ -40,6 +40,11 @@ class APITest(unittest.TestCase):
             def json(self):return {'choices':[]}
         with patch('model_runner.requests.post',return_value=Response()):
             with self.assertRaisesRegex(RuntimeError,'token usage'):API('http://127.0.0.1/v1','','fixture',100).complete([],[],'native_eager')
+        class NullableDetails:
+            status_code=200
+            def json(self):return {'usage':{'prompt_tokens':10,'completion_tokens':5,'prompt_tokens_details':None,'completion_tokens_details':None},'choices':[]}
+        with patch('model_runner.requests.post',return_value=NullableDetails()):
+            _,u=API('http://127.0.0.1/v1','','fixture',100).complete([],[],'native_eager');self.assertEqual(u['cached_input_tokens'],0);self.assertEqual(u['reasoning_tokens'],0)
 
 class ReplayAndRunnerTest(unittest.TestCase):
     @classmethod
