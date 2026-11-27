@@ -1,0 +1,42 @@
+{
+  "providers": {
+    "deepwiki": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "mslearn": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "cloudflare": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://docs.mcp.cloudflare.com/mcp"
+    },
+    "petstore": {
+      "type": "openapi",
+      "spec": "specs/petstore.json",
+      "url": "https://petstore3.swagger.io/api/v3",
+      "allow": [
+        "findPetsByStatus",
+        "getPetById",
+        "getInventory",
+        "getOrderById",
+        "getUserByName"
+      ]
+    },
+    "apisguru": {
+      "type": "openapi",
+      "spec": "specs/apisguru.yaml",
+      "url": "https://api.apis.guru/v2",
+      "allow": [
+        "getMetrics",
+        "getProviders",
+        "getProvider",
+        "getServices"
+      ]
+    }
+  }
+}

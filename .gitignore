@@ -5,3 +5,8 @@
 *.test
 coverage.out
 .env
+__pycache__/
+*.pyc
+/benchmarks/artifacts/*.log
+/benchmarks/artifacts/model-results*.json
+/.venv-bench/

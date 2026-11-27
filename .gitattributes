@@ -1,2 +1,4 @@
 * text=auto eol=lf
 *.exe binary
+# Preserve publisher documents byte-for-byte, including upstream whitespace.
+benchmarks/specs/* -whitespace

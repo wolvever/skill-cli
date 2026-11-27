@@ -1,0 +1,587 @@
+{
+  "captured_at": "2026-11-27T00:45:22.198878+00:00",
+  "config_sha256": "7cdbdfc84e4c1d989339ccabd23c633099432a2795ab1b6cfebcc0f6160e87eb",
+  "providers": {
+    "deepwiki": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "mslearn": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "cloudflare": {
+      "type": "mcp",
+      "transport": "http",
+      "url": "https://docs.mcp.cloudflare.com/mcp"
+    },
+    "petstore": {
+      "type": "openapi",
+      "spec": "specs/petstore.json",
+      "url": "https://petstore3.swagger.io/api/v3",
+      "allow": [
+        "findPetsByStatus",
+        "getPetById",
+        "getInventory",
+        "getOrderById",
+        "getUserByName"
+      ]
+    },
+    "apisguru": {
+      "type": "openapi",
+      "spec": "specs/apisguru.yaml",
+      "url": "https://api.apis.guru/v2",
+      "allow": [
+        "getMetrics",
+        "getProviders",
+        "getProvider",
+        "getServices"
+      ]
+    }
+  },
+  "catalogs": {
+    "apisguru": [
+      {
+        "id": "apisguru.getMetrics",
+        "description": "Get basic metrics",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "apisguru.getProvider",
+        "description": "List all APIs for a particular provider",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "example": "apis.guru",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "provider"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "apisguru.getProviders",
+        "description": "List all providers",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "apisguru.getServices",
+        "description": "List all serviceNames for a particular provider",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "example": "apis.guru",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "provider"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      }
+    ],
+    "cloudflare": [
+      {
+        "id": "cloudflare.migrate_pages_to_workers_guide",
+        "description": "ALWAYS read this guide before migrating Pages projects to Workers.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {},
+          "type": "object"
+        },
+        "annotations": {
+          "idempotentHint": false,
+          "readOnlyHint": true,
+          "title": "Get Pages migration guide"
+        }
+      },
+      {
+        "id": "cloudflare.search_cloudflare_documentation",
+        "description": "Search the Cloudflare documentation.\n\n\t\tThis tool should be used to answer any question about Cloudflare products or features, including:\n\t\t- Workers, Pages, R2, Images, Stream, D1, Durable Objects, KV, Workflows, Hyperdrive, Queues\n\t\t- AI Search, Workers AI, Vectorize, AI Gateway, Browser Run\n\t\t- Zero Trust, Access, Tunnel, Gateway, Browser Isolation, WARP, DDOS, Magic Transit, Magic WAN\n\t\t- CDN, Cache, DNS, Zaraz, Argo, Rulesets, Terraform, Account and Billing\n\n\t\tResults are returned as semantically similar chunks to the query.\n\t\t",
+        "protocol": "mcp",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "query": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "additionalProperties": false,
+          "properties": {
+            "results": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "similarity": {
+                    "description": "Similarity score from AI Search",
+                    "type": "number"
+                  },
+                  "text": {
+                    "description": "Matching documentation chunk text",
+                    "type": "string"
+                  },
+                  "title": {
+                    "description": "Documentation page title",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "Developer documentation URL",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "similarity",
+                  "url",
+                  "title",
+                  "text"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "results"
+          ],
+          "type": "object"
+        },
+        "annotations": {
+          "idempotentHint": false,
+          "readOnlyHint": true,
+          "title": "Search Cloudflare docs"
+        }
+      }
+    ],
+    "deepwiki": [
+      {
+        "id": "deepwiki.ask_wiki_question",
+        "description": "Ask any question about a GitHub repository's codebase and get an AI-powered answer\ngrounded in its DeepWiki.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "question": {
+              "description": "The question to ask about the repository.",
+              "type": "string"
+            },
+            "repoName": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              ],
+              "description": "GitHub repository or list of repositories (max 10) in owner/repo format."
+            }
+          },
+          "required": [
+            "repoName",
+            "question"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "type": "object",
+          "x-fastmcp-wrap-result": true
+        },
+        "annotations": null
+      },
+      {
+        "id": "deepwiki.read_wiki_contents",
+        "description": "View documentation about a GitHub repository.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "repoName": {
+              "description": "GitHub repository in owner/repo format (e.g. \"facebook/react\").",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repoName"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "type": "object",
+          "x-fastmcp-wrap-result": true
+        },
+        "annotations": null
+      },
+      {
+        "id": "deepwiki.read_wiki_structure",
+        "description": "Get a list of documentation topics for a GitHub repository.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "repoName": {
+              "description": "GitHub repository in owner/repo format (e.g. \"facebook/react\").",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repoName"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "type": "object",
+          "x-fastmcp-wrap-result": true
+        },
+        "annotations": null
+      }
+    ],
+    "mslearn": [
+      {
+        "id": "mslearn.microsoft_code_sample_search",
+        "description": "Search for code snippets and examples in official Microsoft Learn documentation. This tool retrieves relevant code samples from Microsoft documentation pages providing developers with practical implementation examples and best practices for Microsoft/Azure products and services related coding tasks. This tool will help you use the **LATEST OFFICIAL** code snippets to empower coding capabilities.\n\n## When to Use This Tool\n- When you are going to provide sample Microsoft/Azure related code snippets in your answers.\n- When you are **generating any Microsoft/Azure related code**.\n\n## Usage Pattern\nInput a descriptive query, or SDK/class/method name to retrieve related code samples. The optional parameter `language` can help to filter results.\n\nEligible values for `language` parameter include: csharp javascript typescript python powershell azurecli al sql java kusto cpp go rust ruby php",
+        "protocol": "mcp",
+        "inputSchema": {
+          "properties": {
+            "language": {
+              "default": null,
+              "description": "Optional parameter specifying the programming language of code snippets to retrieve. Can significantly improve search quality if provided. Eligible values: csharp javascript typescript python powershell azurecli al sql java kusto cpp go rust ruby php",
+              "type": "string"
+            },
+            "query": {
+              "description": "a descriptive query, SDK name, method name or code snippet related to Microsoft/Azure products, services, platforms, developer tools, frameworks, APIs or SDKs",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "results": {
+              "items": {
+                "properties": {
+                  "codeSnippet": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "content_omitted": {
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "readOnlyHint": true,
+          "title": "Microsoft Code Sample Search"
+        }
+      },
+      {
+        "id": "mslearn.microsoft_docs_fetch",
+        "description": "Fetch and convert a Microsoft Learn documentation webpage to markdown format. This tool retrieves the latest complete content of Microsoft documentation webpages including Azure, .NET, Microsoft 365, and other Microsoft technologies.\n\n## When to Use This Tool\n- When search results provide incomplete information or truncated content\n- When you need complete step-by-step procedures or tutorials\n- When you need troubleshooting sections, prerequisites, or detailed explanations\n- When search results reference a specific page that seems highly relevant\n- For comprehensive guides that require full context\n\n## Usage Pattern\nUse this tool AFTER microsoft_docs_search when you identify specific high-value pages that need complete content. The search tool gives you an overview; this tool gives you the complete picture.\n\n## URL Requirements\n- The URL must be a valid HTML documentation webpage from the microsoft.com domain\n- Binary files (PDF, DOCX, images, etc.) are not supported\n\n## Output Format\nmarkdown with headings, code blocks, tables, and links preserved.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "properties": {
+            "url": {
+              "description": "URL of the Microsoft documentation page to read",
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object"
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "readOnlyHint": true,
+          "title": "Microsoft Docs Fetch"
+        }
+      },
+      {
+        "id": "mslearn.microsoft_docs_search",
+        "description": "Search official Microsoft/Azure documentation to find the most relevant and trustworthy content for a user's query. This tool returns up to 10 high-quality content chunks (each max 500 tokens), extracted from Microsoft Learn and other official sources. Each result includes the article title, URL, and a self-contained content excerpt optimized for fast retrieval and reasoning. Always use this tool to quickly ground your answers in accurate, first-party Microsoft/Azure knowledge.\n\n## Follow-up Pattern\nTo ensure completeness, use microsoft_docs_fetch when high-value pages are identified by search. The fetch tool complements search by providing the full detail. This is a required step for comprehensive results.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "properties": {
+            "query": {
+              "default": null,
+              "description": "a query or topic about Microsoft/Azure products, services, platforms, developer tools, frameworks, or APIs",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "results": {
+              "items": {
+                "properties": {
+                  "content": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "contentUrl": {
+                    "type": "string"
+                  },
+                  "content_omitted": {
+                    "type": "boolean"
+                  },
+                  "extensionData": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "readOnlyHint": true,
+          "title": "Microsoft Docs Search"
+        }
+      }
+    ],
+    "petstore": [
+      {
+        "id": "petstore.findPetsByStatus",
+        "description": "Finds Pets by status.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "default": "available",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "petstore.getInventory",
+        "description": "Returns pet inventories by status.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "petstore.getOrderById",
+        "description": "Find purchase order by ID.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "orderId": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "orderId"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "petstore.getPetById",
+        "description": "Find pet by ID.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "petId": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "petId"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      },
+      {
+        "id": "petstore.getUserByName",
+        "description": "Get user by user name.",
+        "protocol": "mcp",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "username": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "username"
+          ],
+          "type": "object"
+        },
+        "annotations": null
+      }
+    ]
+  },
+  "probes": [
+    {
+      "provider": "apisguru",
+      "native_ok": true,
+      "cli_ok": true,
+      "elapsed_ms": 151.11,
+      "tool_count": 4,
+      "catalog_ids_equal": true
+    },
+    {
+      "provider": "cloudflare",
+      "native_ok": true,
+      "cli_ok": true,
+      "elapsed_ms": 2245.02,
+      "tool_count": 2,
+      "catalog_ids_equal": true
+    },
+    {
+      "provider": "deepwiki",
+      "native_ok": true,
+      "cli_ok": true,
+      "elapsed_ms": 2396.23,
+      "tool_count": 3,
+      "catalog_ids_equal": true
+    },
+    {
+      "provider": "mslearn",
+      "native_ok": true,
+      "cli_ok": true,
+      "elapsed_ms": 4981.44,
+      "tool_count": 3,
+      "catalog_ids_equal": true
+    },
+    {
+      "provider": "petstore",
+      "native_ok": true,
+      "cli_ok": true,
+      "elapsed_ms": 107.21,
+      "tool_count": 5,
+      "catalog_ids_equal": true
+    }
+  ],
+  "specs": {
+    "apisguru.yaml": "7b602554c89e9624492f42bd5353b515b998d69ec5c9f5fa3b8e181509fa367f",
+    "elevation.yaml": "26ad2d84fa1fe7ff866a61fa665871eef9e351bd5560adfef905c471af90f7ca",
+    "petstore.json": "00441c05add60f28da55eb4563d3fb6bbda364ba8eb7b381e2e2c98613005c82"
+  }
+}

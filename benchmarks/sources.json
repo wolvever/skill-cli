@@ -1,0 +1,60 @@
+{
+  "collected_on": "2026-11-27",
+  "public_mcp": [
+    {
+      "name": "DeepWiki",
+      "endpoint": "https://mcp.deepwiki.com/mcp",
+      "documentation": "https://docs.devin.ai/work-with-devin/deepwiki-mcp"
+    },
+    {
+      "name": "Microsoft Learn",
+      "endpoint": "https://learn.microsoft.com/api/mcp",
+      "documentation": "https://learn.microsoft.com/en-us/training/support/mcp"
+    },
+    {
+      "name": "Cloudflare Docs",
+      "endpoint": "https://docs.mcp.cloudflare.com/mcp",
+      "documentation": "https://github.com/cloudflare/mcp-server-cloudflare"
+    }
+  ],
+  "openapi": [
+    {
+      "file": "specs/petstore.json",
+      "url": "https://petstore3.swagger.io/api/v3/openapi.json",
+      "version": "3.0.4",
+      "license": "Apache-2.0",
+      "use": "five read-only operations",
+      "sha256": "00441c05add60f28da55eb4563d3fb6bbda364ba8eb7b381e2e2c98613005c82"
+    },
+    {
+      "file": "specs/apisguru.yaml",
+      "url": "https://api.apis.guru/v2/openapi.yaml",
+      "version": "3.0.0",
+      "license": "CC0-1.0",
+      "use": "four read-only operations",
+      "sha256": "7b602554c89e9624492f42bd5353b515b998d69ec5c9f5fa3b8e181509fa367f"
+    },
+    {
+      "file": "specs/elevation.yaml",
+      "url": "https://raw.githubusercontent.com/open-meteo/open-meteo/main/openapi/elevation.yml",
+      "version": "3.1.0",
+      "license": "CC-BY-4.0",
+      "use": "unsupported-version compatibility case",
+      "sha256": "26ad2d84fa1fe7ff866a61fa665871eef9e351bd5560adfef905c471af90f7ca"
+    }
+  ],
+  "other_candidates_not_used": [
+    {
+      "url": "https://api.artic.edu/docs/openapi.json",
+      "status": 403
+    },
+    {
+      "url": "https://pokeapi.co/api/v2/openapi.yaml",
+      "status": 403
+    },
+    {
+      "url": "https://catfact.ninja/docs/api-docs.json",
+      "status": 404
+    }
+  ]
+}

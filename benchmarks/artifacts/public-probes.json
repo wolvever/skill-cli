@@ -1,0 +1,154 @@
+{
+  "captured_at": "2026-11-27T00:53:41.876645+00:00",
+  "measurement": "read_only_live_invocation_smoke_not_model_answer_precision",
+  "criteria": "typed result checks; documentation checks verify usable text/domain, not semantic correctness",
+  "rows": [
+    {
+      "native": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 3091,
+        "result_sha256": "81253b7d354fa6d13c802787e1f038717d442feefb39881ae83edd624e71b5f0",
+        "url_count": 0,
+        "http_status": null
+      },
+      "skill_cli": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 3091,
+        "result_sha256": "81253b7d354fa6d13c802787e1f038717d442feefb39881ae83edd624e71b5f0",
+        "url_count": 0,
+        "http_status": null
+      },
+      "tool": "deepwiki.read_wiki_structure",
+      "args": {
+        "repoName": "facebook/react"
+      },
+      "criterion": "nonempty",
+      "native_elapsed_ms": 1320.61,
+      "cli_elapsed_ms": 1580.39,
+      "normalized_json_equal": true
+    },
+    {
+      "native": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 39437,
+        "result_sha256": "936cf404e52009316265216c187f9d059652b1229daf19807be4c1e1d582bcbe",
+        "url_count": 55,
+        "http_status": null
+      },
+      "skill_cli": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 39437,
+        "result_sha256": "936cf404e52009316265216c187f9d059652b1229daf19807be4c1e1d582bcbe",
+        "url_count": 55,
+        "http_status": null
+      },
+      "tool": "mslearn.microsoft_docs_search",
+      "args": {
+        "query": "Azure Functions timeout limits"
+      },
+      "criterion": "learn.microsoft.com",
+      "native_elapsed_ms": 2955.71,
+      "cli_elapsed_ms": 3107.29,
+      "normalized_json_equal": true
+    },
+    {
+      "native": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 69828,
+        "result_sha256": "7cbbd5bfc18cebb7dea4b615cdfb4788856863c284647e1726b97d08e05eb042",
+        "url_count": 22,
+        "http_status": null
+      },
+      "skill_cli": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 69828,
+        "result_sha256": "7cbbd5bfc18cebb7dea4b615cdfb4788856863c284647e1726b97d08e05eb042",
+        "url_count": 22,
+        "http_status": null
+      },
+      "tool": "cloudflare.search_cloudflare_documentation",
+      "args": {
+        "query": "Workers KV get text value"
+      },
+      "criterion": "developers.cloudflare.com",
+      "native_elapsed_ms": 2736.18,
+      "cli_elapsed_ms": 2644.9,
+      "normalized_json_equal": true
+    },
+    {
+      "native": {
+        "ok": false,
+        "criterion_pass": false,
+        "error": "MCP tool execution error",
+        "result_bytes": 70,
+        "result_sha256": "41b5c130ce128389eb368a729c99101e488cf6eec5ccc98b34addda623961980",
+        "url_count": 0,
+        "http_status": 404
+      },
+      "skill_cli": {
+        "ok": false,
+        "criterion_pass": false,
+        "error": "HTTP 404",
+        "result_bytes": 70,
+        "result_sha256": "65e68f63714e4237e7f63c7b6a715437de54302c5f461e127e8f393453b7ef87",
+        "url_count": 0,
+        "http_status": 404
+      },
+      "tool": "petstore.getPetById",
+      "args": {
+        "petId": 1
+      },
+      "criterion": "pet",
+      "native_elapsed_ms": 1236.97,
+      "cli_elapsed_ms": 1375.62,
+      "normalized_json_equal": true,
+      "failure_class": "upstream_missing_record"
+    },
+    {
+      "native": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 717,
+        "result_sha256": "4393867f7aeaddb738b5f94185afe906424b4976cf07c50cd0b60687ea8e2b44",
+        "url_count": 0,
+        "http_status": 200
+      },
+      "skill_cli": {
+        "ok": true,
+        "criterion_pass": true,
+        "error": null,
+        "result_bytes": 717,
+        "result_sha256": "4f63e8b036dcced4dbe8c8be2f5044a1ea78eaaf7c45e073913c34b585d606e7",
+        "url_count": 0,
+        "http_status": 200
+      },
+      "tool": "apisguru.getMetrics",
+      "args": {},
+      "criterion": "metrics",
+      "native_elapsed_ms": 1248.46,
+      "cli_elapsed_ms": 1154.98,
+      "normalized_json_equal": true
+    }
+  ],
+  "openmeteo_3_1_compatibility": {
+    "exit_code": 1,
+    "response": {
+      "ok": false,
+      "error": "only OpenAPI 3.0 JSON/YAML is currently supported"
+    },
+    "stdout": "{\"ok\":false,\"error\":\"only OpenAPI 3.0 JSON/YAML is currently supported\"}\n"
+  }
+}

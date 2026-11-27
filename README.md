@@ -113,3 +113,9 @@ go build ./cmd/skill-cli
 Tests exercise stdio, Streamable HTTP and legacy SSE against the official Go MCP SDK, nested JSON, session retention, tool errors, OpenAPI validation/encoding, HTTP deadlines and size limits, redirect/credential boundaries, gateway authentication/allowlists, and CLI output. CI runs on Linux, Windows, and macOS, with a Linux race check.
 
 The [hands-on evaluation](docs/research/evaluation.md) explains the ranking and implementation choices. Design references: [UXC](https://github.com/holon-run/uxc) for protocol adapters and compact discovery, [mcpc](https://github.com/apify/mcpc) for session lifecycle and error semantics, [MCPorter](https://github.com/openclaw/mcporter) for embedding/code generation, and [mcp-cli](https://github.com/philschmid/mcp-cli) for a small agent-facing command surface. This implementation uses the [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and [kin-openapi](https://github.com/getkin/kin-openapi); it does not copy the reference projects' implementations.
+
+## Agent skill and native-MCP benchmark
+
+The reusable [skill-cli skill](skills/skill-cli/SKILL.md) teaches progressive discovery, schema inspection, portable JSON input, failure handling, and gateway use. Install the `skills/skill-cli` folder into your agent's skills directory; for Codex the usual destination is `~/.codex/skills/skill-cli`.
+
+The [benchmark suite](benchmarks/README.md) includes public MCP/OpenAPI sources, a 40-task labeled corpus, an official-SDK native MCP peer, frozen catalog replay, retrieval metrics, token-component counts, live read-only probes, and a three-arm model-selection runner with provider-reported token usage. Read the [measured results and limitations](benchmarks/RESULTS.md) before interpreting savings or precision/recall. Model accuracy and billed cost require a configured model endpoint; tokenizer counts are not billing measurements.

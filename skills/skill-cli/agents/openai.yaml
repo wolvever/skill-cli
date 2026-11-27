@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill CLI"
+  short_description: "Discover and call MCP tools and HTTP APIs"
+  default_prompt: "Use $skill-cli to discover the relevant capability, inspect its schema, and call it."

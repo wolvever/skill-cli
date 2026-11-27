@@ -1,0 +1,16 @@
+{
+  "captured_at": "2026-11-27T00:55:05.074212+00:00",
+  "status": "not_run",
+  "reason": "No model API key was exposed and no local model was available at the probed Ollama/LM Studio endpoints.",
+  "OPENAI_API_KEY_present": false,
+  "model_selection_precision": null,
+  "model_selection_recall": null,
+  "provider_reported_input_tokens": null,
+  "provider_reported_output_tokens": null,
+  "billed_usd": null,
+  "available_measurements": [
+    "retrieval.json",
+    "public-probes.json"
+  ],
+  "note": "Tokenizer component counts are measured separately and are not model billing."
+}
