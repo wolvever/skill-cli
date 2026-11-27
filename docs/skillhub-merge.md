@@ -2,7 +2,7 @@
 
 Source reviewed: `~/work/skillhub` (`README.md`, `EVALUATION.md`, `run_fixture.py`, the MCP/HTTP/OpenAPI fixtures, and recorded outputs). Destination: `wolvever/skill-cli`. The source directory has no Git repository, service, CLI binary implementation, or Go module. Its README explicitly identifies a proposal; its executable code is a Python evaluation harness and fixtures. There was no separate implementation to merge by Git history.
 
-The final project and executable name remains **skill-cli**. The source evaluation is preserved; no files in the original Skillhub workspace were changed.
+The final project and executable name remains **skill-cli**. The original [source evaluation](research/skillhub-evaluation.md) is archived here. After integration, the redundant `~/work/skillhub` workspace was removed at the user's request; its useful fixture behavior is covered by this project's Go implementation and tests.
 
 | Useful source idea | Existing skill-cli behavior | Integrated result |
 | --- | --- | --- |
